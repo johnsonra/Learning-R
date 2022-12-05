@@ -1,6 +1,9 @@
 ---
 title: "RStudio Intro"
-format: gfm
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
 editor: visual
 ---
 
@@ -30,17 +33,20 @@ Which of the following are valid R variable names?
     2widths
     celsius2kelvin
 
+<!-- Challenge 1 answer begin -->
+
 -   Valid
-    * min_height
-    * max.height
-    * .mass
-    * MaxLength
-    * celsius2kelvin
-    
+    -   min_height
+    -   max.height
+    -   .mass
+    -   MaxLength
+    -   celsius2kelvin
 -   Invalid
-    * _age
-    * min-length
-    * 2widths
+    -   \_age
+    -   min-length
+    -   2widths
+
+<!-- Challenge 1 answer end -->
 
 #### Challenge 2
 
@@ -53,27 +59,41 @@ mass <- mass * 2.3
 age <- age - 20
 ```
 
+<!-- Challenge 2 answer begin -->
+
 `mass` is equal to `r mass`, and `age` is equal to `r age`.
+
+<!-- Challenge 2 answer end -->
 
 #### Challenge 3
 
 Run the code from the previous challenge, and write a command to compare `mass` to `age`. Is mass larger than age?
 
+<!-- Challenge 3 answer begin -->
+
 ```{r}
 mass > age
 ```
+
+<!-- Challenge 3 answer end -->
 
 #### Challenge 4
 
 Clean up your working environment by deleting the mass and age variables.
 
+<!-- Challenge 4 answer begin -->
+
 ```{r}
 rm(mass, age)
 ```
 
+<!-- Challenge 4 answer end -->
+
 #### Challenge 5
 
 Install the following packages: `ggplot2`, `dplyr`, `gapminder`
+
+<!-- Challenge 5 answer begin -->
 
 ```{r}
 # this will fail if the required packages are not installed
@@ -81,3 +101,5 @@ library(ggplot2)
 library(dplyr)
 library(gapminder)
 ```
+
+<!-- Challenge 5 answer end -->
