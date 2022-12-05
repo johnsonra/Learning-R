@@ -1,0 +1,108 @@
+RStudio Intro
+================
+
+The exercises in this document follow along closely with [Lesson
+1](https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html)
+of [R for Reproducible Scientific
+Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided
+by the [Software Carpentry](https://software-carpentry.org/) community
+and is licensed under [CC-BY
+4.0](https://creativecommons.org/licenses/by/4.0/) by [The
+Carpentries](https://carpentries.org/).
+
+<div>
+
+> **Key Points**
+>
+> - Use RStudio to write and run R programs.
+> - R has the usual arithmetic operators and mathematical functions.
+> - Use `<-` to assign values to variables.
+> - Use `ls()` to list the variables in a program.
+> - Use `rm()` to delete objects in a script.
+> - Use `install.packages()` to install packages and `library()` to load
+>   them.
+
+</div>
+
+#### Challenge 1
+
+Which of the following are valid R variable names?
+
+    min_height
+    max.height
+    _age
+    .mass
+    MaxLength
+    min-length
+    2widths
+    celsius2kelvin
+
+- Valid
+  - min_height
+  - max.height
+  - .mass
+  - MaxLength
+  - celsius2kelvin
+- Invalid
+  - \_age
+  - min-length
+  - 2widths
+
+#### Challenge 2
+
+What will be the value of each variable after each statement in the
+following lines of code?
+
+``` r
+mass <- 47.5
+age <- 122
+mass <- mass * 2.3
+age <- age - 20
+```
+
+`mass` is equal to 109.25, and `age` is equal to 102.
+
+#### Challenge 3
+
+Run the code from the previous challenge, and write a command to compare
+`mass` to `age`. Is mass larger than age?
+
+``` r
+mass > age
+```
+
+    [1] TRUE
+
+#### Challenge 4
+
+Clean up your working environment by deleting the mass and age
+variables.
+
+``` r
+rm(mass, age)
+```
+
+#### Challenge 5
+
+Install the following packages: `ggplot2`, `dplyr`, `gapminder`
+
+``` r
+# this will fail if the required packages are not installed
+library(ggplot2)
+library(dplyr)
+```
+
+
+    Attaching package: 'dplyr'
+
+    The following objects are masked from 'package:stats':
+
+        filter, lag
+
+    The following objects are masked from 'package:base':
+
+        intersect, setdiff, setequal, union
+
+``` r
+library(gapminder)
+```

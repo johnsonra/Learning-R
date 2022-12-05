@@ -31,7 +31,16 @@ Which of the following are valid R variable names?
     celsius2kelvin
 
 -   Valid
+    * min_height
+    * max.height
+    * .mass
+    * MaxLength
+    * celsius2kelvin
+    
 -   Invalid
+    * _age
+    * min-length
+    * 2widths
 
 #### Challenge 2
 
@@ -44,12 +53,14 @@ mass <- mass * 2.3
 age <- age - 20
 ```
 
+`mass` is equal to `r mass`, and `age` is equal to `r age`.
+
 #### Challenge 3
 
 Run the code from the previous challenge, and write a command to compare `mass` to `age`. Is mass larger than age?
 
 ```{r}
-# comparison code goes here
+mass > age
 ```
 
 #### Challenge 4
@@ -57,7 +68,7 @@ Run the code from the previous challenge, and write a command to compare `mass` 
 Clean up your working environment by deleting the mass and age variables.
 
 ```{r}
-# code goes here
+rm(mass, age)
 ```
 
 #### Challenge 5
