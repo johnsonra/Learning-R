@@ -24,7 +24,7 @@ Carpentries](https://carpentries.org/).
 
 </div>
 
-#### Challenge 1
+#### Challenge 1 <img src="score1.png">
 
 Which of the following are valid R variable names?
 
@@ -37,6 +37,8 @@ Which of the following are valid R variable names?
     2widths
     celsius2kelvin
 
+<!-- Challenge 1 answer begin -->
+
 - Valid
   - min_height
   - max.height
@@ -48,7 +50,9 @@ Which of the following are valid R variable names?
   - min-length
   - 2widths
 
-#### Challenge 2
+<!-- Challenge 1 answer end -->
+
+#### Challenge 2 <img src="score2.png">
 
 What will be the value of each variable after each statement in the
 following lines of code?
@@ -59,7 +63,7 @@ age <- 122
 mass <- mass * 2.3
 age <- age - 20
 
-# print results
+# print results (this answer is in the wrong place)
 mass
 ```
 
@@ -71,21 +75,31 @@ age
 
     [1] 102
 
-#### Challenge 3
+<!-- Challenge 2 answer begin -->
+
+See code output above. <!-- Challenge 2 answer end -->
+
+#### Challenge 3 <img src="score3.png">
 
 Run the code from the previous challenge, and write a command to compare
 `mass` to `age`. Is mass larger than age?
 
+<!-- Challenge 3 answer begin -->
+
 ``` r
-mass > age
+mass < age
 ```
 
-    [1] TRUE
+    [1] FALSE
 
-#### Challenge 4
+<!-- Challenge 3 answer end -->
+
+#### Challenge 4 <img src="score4.png">
 
 Clean up your working environment by deleting the mass and age
 variables.
+
+<!-- Challenge 4 answer begin -->
 
 ``` r
 rm(mass, age)
@@ -94,9 +108,13 @@ ls()
 
     character(0)
 
-#### Challenge 5
+<!-- Challenge 4 answer end -->
+
+#### Challenge 5 <img src="score5.png">
 
 Install the following packages: `ggplot2`, `dplyr`, `gapminder`
+
+<!-- Challenge 5 answer begin -->
 
 ``` r
 # this will fail if the required packages are not installed
@@ -118,3 +136,5 @@ library(dplyr)
 ``` r
 library(gapminder)
 ```
+
+<!-- Challenge 5 answer end -->

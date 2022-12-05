@@ -1,0 +1,109 @@
+---
+title: "Learning R"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+---
+
+<!-- This file is not intended to be edited -->
+<!-- Progress updates will be rendered automatically when pushing to GitHub -->
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(dplyr)
+library(purrr)
+
+library(LearnR) # devtools::install_github('johnsonra/LearnR')
+library(quarto)
+
+# stater qmd files (use specific commit to keep things consistent with forks) - do I need this?
+main_base <- 'https://raw.githubusercontent.com/johnsonra/Learning-R/3864dd5ff211ca6c2d7700f995d995ccf01d15d5/Modules/'
+
+# sample solutions
+solution_base <- 'https://raw.githubusercontent.com/johnsonra/Learning-R/2d96b8d2d157fd887510ce28e504aaa3a925fdbd/Modules/'
+
+# check submission against solution
+checks <- tibble(modules = system('ls Modules', intern = TRUE),
+
+                 # only parse these if they have submitted an update to this file
+                 submissions = paste0('Modules/', modules, '/exercises.qmd') %>%
+                   map(~ parse_qmd(.x)),
+                 
+                 # sample solutions from the solutions branch
+                 solutions = paste0(solution_base, modules, '/exercises.qmd') %>%
+                   map(~ parse_qmd(.x)),
+
+                 # doube check that the solution renders - if not, we'll count it as incomplete
+                 submission_renders = map_lgl(modules, ~ {
+                     val <- try(quarto_render(paste0('Modules/', .x, '/exercises.qmd')))
+                     return(class(val) != 'try-error')
+                   }),
+                 
+                 # compare submission to solution
+                 code_sim = map2(submissions, solutions, ~ compare_source_code(.x$f_code, .y$f_code)),
+                 text_sim = map2(submissions, solutions, ~ compare_text(.x$f_text, .y$f_text)) %>%
+                   map(~ pgamma(.x, 1, 1, lower.tail = FALSE)), # convert distances to scores (figure out this distribution later - will probably be problem dependent)
+                 
+                 # Total score
+                 score = map2_dbl(code_sim, text_sim, ~ mean(.x * .y))
+                 )
+
+#' @param score_i Numeric score in [0,1]
+#' @param score_png Location of graphic to save
+plot_score <- function(score_i, score_png)
+{
+    png(score_png, bg = 'transparent', height = 16, width = 100)
+    par(mar = rep(0,4))                                                       # get rid of margins
+    plot(c(0, 1), rep(1, 2), col = 'grey80', type = 'l', lwd = 17, bty = 'n', # background for score line
+         xaxt = 'n', yaxt = 'n')
+    lines(c(0, score_i), rep(1, 2), col = 'green4', lwd = 17)                 # line from 0 to score
+    text(0.5, 1, paste0(round(score_i*100), '%'))                             # percentage
+    dev.off()
+}
+
+# Edit READMEs generated during checks to add feedback
+for(l in 1:nrow(checks)) # for each lesson
+{
+  if(!checks$submission_renders[l])
+    next
+  
+  # over-all score
+  plot_score(checks$score[l],
+             paste0('Modules/', checks$modules[l], '/score0.png'))
+  
+  # read in rendered output
+  f_md <- paste0('Modules/', checks$modules[l], '/README.md')
+  out_md <- readLines(f_md)
+  
+  # identify challenges
+  challenges <- grepl('#### Challenge', out_md) %>%
+    which()
+  
+  # double check that we have the correct number of challenges
+  if(length(challenges) != length(checks$code_sim[[l]]))
+  {
+    warning("Number of challenges aren't equal to number of solutions")
+    next
+  }
+  
+  for(i in 1:length(checks$code_sim[[l]])) # for each challenge in lesson `l`
+  {
+    # make graphic
+    plot_score(with(checks, code_sim[[l]][i] * text_sim[[l]][i]),
+               paste0('Modules/', checks$modules[l], '/score', i, '.png'))
+    
+    # add graphic to readme
+    out_md[challenges[i]] <- paste0(out_md[challenges[i]], ' <img src="score', i, '.png">')
+  }
+  
+  # write changes
+  cat(out_md, file = f_md, sep = '\n')
+}
+```
+
+| Lesson        | Score                                         |
+|:--------------|:---------------------------------------------:|
+| RStudio Intro | <a href="tree/main/Modules/01-RStudio-Intro"><img src="Modules/01-RStudio-Intro/README.md"></a> |

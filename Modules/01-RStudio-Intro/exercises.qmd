@@ -59,13 +59,13 @@ age <- 122
 mass <- mass * 2.3
 age <- age - 20
 
-# print results
+# print results (this answer is in the wrong place)
 mass
 age
 ```
 
 <!-- Challenge 2 answer begin -->
-You answer goes here
+See code output above.
 <!-- Challenge 2 answer end -->
 
 #### Challenge 3
@@ -74,7 +74,7 @@ Run the code from the previous challenge, and write a command to compare `mass` 
 
 <!-- Challenge 3 answer begin -->
 ```{r}
-mass > age
+mass < age
 ```
 <!-- Challenge 3 answer end -->
 
