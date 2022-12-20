@@ -10,8 +10,7 @@ format:
 <!-- Progress updates will be rendered automatically when pushing to GitHub -->
 
 ```{r}
-#| echo: false
-#| warning: false
+#| include: false
 
 library(dplyr)
 library(purrr)
@@ -106,4 +105,4 @@ for(l in 1:nrow(checks)) # for each lesson
 
 | Lesson        | Score                                         |
 |:--------------|:---------------------------------------------:|
-| RStudio Intro | <a href="tree/main/Modules/01-RStudio-Intro"><img src="Modules/01-RStudio-Intro/README.md"></a> |
+| RStudio Intro | <a href="Modules/01-RStudio-Intro"><img src="Modules/01-RStudio-Intro/score0.png"></a> |
