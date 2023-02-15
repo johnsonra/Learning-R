@@ -31,7 +31,8 @@ Use an `if()` statement to print a suitable message reporting whether there are 
 <!-- Challenge 1a answer begin -->
 
 ```{r}
-# you code goes here
+if(any(gapminder$year == 2002))
+  print("Found record(s) for the year 2002 in gapminder")
 ```
 
 <!-- Challenge 1a answer end -->
@@ -41,7 +42,8 @@ Now do the same for 2012.
 <!-- Challenge 1b answer begin -->
 
 ```{r}
-# your code goes here
+if(any(gapminder$year == 2012))
+  print("Found record(s) for the year 2012 in gapminder")
 ```
 
 <!-- Challenge 1b answer end -->
@@ -74,7 +76,14 @@ Compare the objects `output_vector` and `output_vector2`. Are they the same? If 
 
 <!-- Challenge 2 answer begin -->
 
-Code and/or text answer goes here.
+The values are the same, but they are ordered differently. The is because the matrix is stored as a vector of columns, so `as.vector` returns column 1, then column 2, etc...
+
+To make them the same, we could modify the assignment statement, `output_matrix[i, j] <- temp_output`, by swaping `i` and `j`. This would transpose the matrix and return the same order as is in `output_vector`. Alternately, we could use the transpose function, `t`, as follows:
+
+```{r}
+t(output_matrix) %>%
+  as.vector()
+```
 
 <!-- Challenge 2 answer end -->
 
@@ -85,7 +94,21 @@ Write a script that loops through the `gapminder` data by continent and prints o
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# your code goes here
+thresh <- 50
+
+for(cont in unique(as.character(gapminder$continent)))
+{
+  tmp <- gapminder[gapminder$continent == cont, 'lifeExp'] %>%
+    unlist() %>%
+    mean()
+  
+  if(tmp <= thresh)
+  {
+    cat("Average life expectancy in", cont, "is less than", thresh, "\n")
+  }else{
+    cat("Average life expectancy in", cont, "is greater than", thresh, "\n")
+  }
+}
 ```
 
 <!-- Challenge 3 answer end -->
@@ -97,7 +120,23 @@ Modify the script from Challenge 3 to loop over each country. This time print ou
 <!-- Challenge 4 answer begin -->
 
 ```{r}
-# your code goes here
+thresh <- c(50, 70)
+
+for(ctry in unique(as.character(gapminder$country)))
+{
+  tmp <- gapminder[gapminder$country == ctry, 'lifeExp'] %>%
+    unlist() %>%
+    mean()
+  
+  if(tmp <= thresh[1])
+  {
+    cat("Average life expectancy in", ctry, "is less than", thresh[1], "\n")
+  }else if(tmp <= thresh[2]){
+    cat("Average life expectancy in", ctry, "is between", thresh[1], "and", thresh[2], "\n")
+  }else{
+    cat("Average life expectancy in", ctry, "is greater than", thresh[2], "\n")
+  }
+}
 ```
 
 <!-- Challenge 4 answer end -->

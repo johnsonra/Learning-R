@@ -29,7 +29,11 @@ c(1, 2, 'f')
 
 <!-- Challenge 1 answer begin -->
 
-Your answer goes here
+`c(1, 2, 3)` should give me a numeric vector.
+
+`c('d', 'e', 'f')` should give me a character vector.
+
+`c(1, 2, 'f')` should also give me a character vector, because numbers can be coerced to characters, but characters can't be coerced to a numeric value.
 
 <!-- Challenge 1 answer end -->
 
@@ -39,7 +43,7 @@ Look at the help for the `paste` function. You will need to use it later. What's
 
 <!-- Challenge 2 answer begin -->
 
-Your answer goes here
+`sep` allows you to change the default separator between each argument passed to `paste`. By default, `paste` returns a vector of character values, but when `collapse` is provided, the value for `collapse` is pasted between each value in the vector, which is collapsed into a single character value.
 
 <!-- Challenge 2 answer end -->
 
@@ -55,6 +59,6 @@ Use `??"read table"` to look up functions related to reading in tabular data.
 
 <!-- Challenge 3 answer begin -->
 
-Your answer goes here
+`read.delim` would be a good solution, or you could use `read.table` and specify `sep = '\t'`.
 
 <!-- Challenge 3 answer end -->

@@ -39,8 +39,10 @@ Using the `full_join` function, join tables `jdf4` and `jdf5`. What has happened
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-# Insert code here
+full_join(jdf4, jdf5)
 ```
+
+`P26039` and `P02468` are only found in either `jdf4` or `jdf5` (not both), so NA's were inserted into the table where they are undefined.
 
 <!-- Challenge 1 answer end -->
 
@@ -51,7 +53,7 @@ Join tables `jdf4` and `jdf5`, keeping only observations in `jdf4`.
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# Insert code here
+left_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 2 answer end -->
@@ -63,7 +65,7 @@ Join tables `jdf4` and `jdf5`, keeping only observations in `jdf5`.
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# Insert code here
+right_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 3 answer end -->
@@ -75,7 +77,7 @@ Join tables `jdf4` and `jdf5`, keeping observations observed in both tables.
 <!-- Challenge 4 answer begin -->
 
 ```{r}
-# Insert code here
+inner_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 4 answer end -->
@@ -92,6 +94,10 @@ interpret the result, where both tables have duplicated keys.
 
 <!-- Challenge 5 answer begin -->
 
-*insert answer here*
+`Q99PL5` are in both `jdf6` and `jdf7` twice, and `inner_join` doesn't recognize that "isoform" and "isoform_num" should be matched. Because of this, we get all combinations (4 rows), which doesn't make biological sense. Explicitly matching `jdf6$isoform` to `jdf7$isoform_num` takes care of this issue:
+
+```{r}
+inner_join(jdf6, jdf7, by = c('uniprot' = 'uniprot', 'isoform' = 'isoform_num'))
+```
 
 <!-- Challenge 5 answer end -->

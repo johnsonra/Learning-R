@@ -47,6 +47,13 @@ pdf(file.path(module9, "Life_Exp_vs_time.pdf"), width=12, height=4)
 ggplot(gapminder, aes(year, lifeExp, color=country)) +
   geom_line() +
   theme(legend.position = "none")
+
+ggplot(gapminder, aes(year, lifeExp, color = country)) +
+  geom_line() +
+  facet_grid(~ continent) +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90))
+
 # You then have to make sure to turn off the pdf device!
 dev.off()
 ```
@@ -62,7 +69,15 @@ Use this script to write out the new subset to a file in the `cleaned-data/` dir
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# insert code here
+source(file.path(module9, 'clean_data.R'))
+
+# check that `cleaned-data/` exists
+if(!file.exists(file.path(module9, 'cleaned-data')))
+  dir.create(file.path(module9, 'cleaned-data'))
+
+write.table(gapminder_cleaned, 
+            file = file.path(module9, 'cleaned-data', 'gapminder_cleaned.csv'),
+            sep = ',', quote = FALSE, row.names = FALSE)
 ```
 
 <!-- Challenge 2 answer end -->

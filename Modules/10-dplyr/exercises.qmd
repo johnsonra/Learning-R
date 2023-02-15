@@ -34,8 +34,11 @@ Write a single command (which can span multiple lines and includes pipes) that w
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-# insert code here
+gap_africa <- filter(gapminder, continent == 'Africa') %>%
+  select(lifeExp, country, year)
 ```
+
+This subset of `gapminder` has `r nrow(gap_africa)`. This corresponds to data from `r length(unique(gap_africa$country))` countries over `r length(unique(gap_africa$year))` years.
 
 <!-- Challenge 1 answer end -->
 
@@ -46,8 +49,13 @@ Calculate the average life expectancy per country. Which has the longest average
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# insert code here
+ave_lifeExp <- gapminder %>%
+  group_by(country) %>%
+  summarize(mean_lifeExp = mean(lifeExp)) %>%
+  ungroup()
 ```
+
+The country with the lowest life expectancy is `r arrange(ave_lifeExp, mean_lifeExp)$country[1] %>% as.character()`, and the country with the highest life expectancy is `r arrange(ave_lifeExp, desc(mean_lifeExp))$country[1] %>% as.character()`
 
 <!-- Challenge 2 answer end -->
 
@@ -58,7 +66,13 @@ Calculate the average life expectancy in 2002 of 2 randomly selected countries f
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# insert code here
+gapminder %>% 
+  filter(year == 2002) %>%
+  group_by(continent) %>%
+  slice_sample(n = 2) %>%
+  summarize(mean_lifeExp = mean(lifeExp)) %>%
+  ungroup() %>%
+  arrange(desc(continent))
 ```
 
 <!-- Challenge 3 answer end -->

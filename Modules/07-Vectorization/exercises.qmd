@@ -33,7 +33,8 @@ Make a new column in the `gapminder` data frame that contains population in unit
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-# your code goes here
+gapminder$pop_millions <- gapminder$pop / 1e6
+head(gapminder)
 ```
 
 <!-- Challenge 1 answer end -->
@@ -45,7 +46,8 @@ On a single graph, plot population, in millions, against year, for all countries
 <!-- Challenge 2a answer begin -->
 
 ```{r}
-# your code goes here
+ggplot(gapminder, aes(year, pop_millions)) +
+  geom_point()
 ```
 
 <!-- Challenge 2a answer end -->
@@ -55,7 +57,11 @@ Repeat the exercise, graphing only for China, India, and Indonesia. Again, do no
 <!-- Challenge 2b answer begin -->
 
 ```{r}
-# your code goes here
+country_subset <- c('China', 'India', 'Indonesia')
+
+gapminder[gapminder$country %in% country_subset,] %>%
+  ggplot(aes(year, pop_millions)) +
+  geom_point()
 ```
 
 <!-- Challenge 2b answer end -->
@@ -80,7 +86,11 @@ Did you get the output you expected? If not and the video didn't clear things up
 
 <!-- Challenge 3 answer begin -->
 
-Your answer goes here.
+-   `m^-1` returns `1/m` for each cell in `m`.
+-   `m * c(1, 0, -1)` results in row 1 being multipled by 1, row 2 being multiplied by 0, and row 3 being mulitplied by -1
+-   `m > c(0, 20)` and `m * c(1, 0, -1, 2)` are a little weird, because the vectors we are using are not the same as the number of rows. The number of elements in `m` is a multiple of the length of each vector, so recycling works without a warning. Be careful with recycling, though, because sometimes it doesn't work the way you expect.
+    -   `m > c(0, 20)` will compare `m > 0` on rows 1 and 3 of columns 1 and 3, and row 2 of columns 2 and 4, while `m > 20` will be used on row 2 of columns 1 and 3, and rows 1 and 3 of columns 2 and 4.
+    -   `m * c(1, 0, -1, 2)` will multiply the first column by `c(1, 0, -1)`, the second column by `c(2, 1, 0)`, the third column by `c(-1, 2, 1)`, and the fourth column by `c(0, -1, 2)`.
 
 <!-- Challenge 3 answer end -->
 
@@ -95,7 +105,8 @@ This would be tedious to type out, and impossible for high values of $n$. Use ve
 <!-- Challenge 4a answer begin -->
 
 ```{r}
-# your code goes here
+n <- 100
+sum(1 / (1:n)^2)
 ```
 
 <!-- Challenge 4a answer end -->
@@ -105,7 +116,10 @@ What is the sum when $n=10,000$?
 <!-- Challenge 4b answer begin -->
 
 ```{r}
-# your code goes here
+n <- 1e4
+sum(1 / (1:n)^2)
 ```
 
 <!-- Challenge 4b answer end -->
+
+(show this as a function in the video as a pre-intro to the next section)
