@@ -1,0 +1,62 @@
+---
+title: "Project Intro"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+editor: visual
+---
+
+The exercises in this document follow along closely with [Lesson 2](https://swcarpentry.github.io/r-novice-gapminder/02-project-intro/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+::: callout-tip
+## Key Points
+
+-   Use RStudio to create and manage projects with consistent layout.
+-   Treat raw data as read-only.
+-   Treat generated output as disposable.
+-   Separate function definition and application.
+:::
+
+#### Challenge 1
+
+Create a self-contained project
+
+We're going to turn our Learning-R project into a project in RStudio:
+
+1.  If you haven't already, clone your Learning-R project onto your local machine.
+2.  In RStudio, click the "File" menu button, then "New Project".
+3.  Click "Existing Directory" and locate the directory containing your Learning-R project.
+4.  Click the "Create Project" button.
+
+#### Challenge 2
+
+Open an RStudio project through the file system
+
+1.  Exit RStudio.
+2.  Open to your Learning-R project directory in the File Explorer or Finder app.
+3.  Double click the `.Rproj` file in the root directory of your course project repository.
+4.  Open your copy of `Modules/02-Project_Intro/exercises.qmd` in RStudio.
+5.  Take a screenshot of your RStudio session and place it in the `Modules/02-Project-Intro/` directory. It should have "Learning-R - main - RStudio" in the header (or something similar).
+6.  Modify the line just below this to include your screenshot (you should just need to replace "screenshot.png" with the name of your screenshot file).
+
+<!-- Challenge 2 answer begin -->
+
+![](screenshot.png)
+
+<!-- Challenge 2 answer end -->
+
+#### Challenge 3
+
+You should have installed the `gapminder` package. If you are following along with the Software Carpentry notes, they ask us to download the gapminder data set at this point. Instead, we'll load it directly from the `gapminder` package (i.e. all you need to do for this challenge is be sure the `gapminder` package is installed).
+
+<!-- Challenge 3 answer begin -->
+
+```{r}
+library(gapminder)
+data(gapminder)
+# let's take a look at the data we'll be working with
+gapminder
+```
+
+<!-- Challenge 3 answer end -->

@@ -1,0 +1,185 @@
+---
+title: "Learning R"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+---
+
+<!-- This file is not intended to be edited -->
+<!-- Progress updates will be rendered automatically when pushing to GitHub -->
+
+```{r}
+#| include: false
+
+library(dplyr)
+library(purrr)
+
+library(LearnR) # devtools::install_github('johnsonra/LearnR')
+library(quarto)
+
+library(knitr)
+
+
+# sample solutions base (use specific commit to keep things consistent with forks)
+# add file path to this to get raw file content
+solution_sha <- '2d96b8d2d157fd887510ce28e504aaa3a925fdbd'
+solution_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/', solution_sha, '/')
+
+# starter code base
+starter_sha <- '97ca9884ce7e0db3052b15ecab24d03b646ff67b'
+starter_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/', starter_sha, '/')
+
+# current branch
+branch <- system('git branch', intern = TRUE) %>%
+  grep(pattern = '*', fixed = TRUE, value = TRUE) %>%
+  gsub(pattern = '* ', replacement = '', fixed = TRUE)
+
+# check submission against solution
+checks <- tibble(modules = system('ls Modules', intern = TRUE),
+
+                 # paths to files on GitHub
+                 starter_path = paste0(starter_base, 'Modules/', modules, '/exercises.qmd'),
+                 solution_path = paste0(solution_base, 'Modules/', modules, '/exercises.qmd'),
+                 submission_path = paste0('Modules/', modules, '/exercises.qmd'),
+                 
+                 # check to see if they have started on the exercise
+                 started = map2_lgl(starter_path, submission_path, ~ {
+                   starter_file <- readLines(.x)
+                   submission_file <- readLines(.y)
+                   
+                   length(starter_file) != length(submission_file) |
+                      any(starter_file  !=        submission_file)
+                 }),
+                   
+                 # only parse these if they have submitted an update to this file
+                 submissions = map(submission_path, ~ parse_qmd(.x)),
+                 
+                 # sample solutions from the solutions branch
+                 solutions = map(solution_path, ~ parse_qmd(.x)),
+
+                 # double check that the solution renders - if not, we'll count it as incomplete
+                 submission_renders = ifelse(started,
+                                             map_lgl(modules, ~ {
+                                               val <- try(quarto_render(paste0('Modules/', .x, '/exercises.qmd')), silent = TRUE)
+                                               return(class(val) != 'try-error')
+                                               }),
+                                             FALSE),
+                 
+                 # compare submission to solution
+                 code_sim = map2(submissions, solutions, ~ {
+                   val <- try(compare_source_code(.x$f_code, .y$f_code), silent = TRUE)
+                   if(class(val) == 'try-error')
+                     return(0)
+                   return(val)}),
+                 
+                 text_sim = map2(submissions, solutions, ~ {
+                   val <- try(compare_text(.x$f_text, .y$f_text), silent = TRUE)
+                   if(class(val) == 'try-error')
+                     return(0)
+                   return(val)}) %>%
+                   
+                   map(~ pgamma(.x, 1, 1, lower.tail = FALSE)), # convert distances to scores (figure out this distribution later - will probably be problem dependent)
+                 
+                 # Total score
+                 score = ifelse(started,
+                                map2_dbl(code_sim, text_sim, ~ mean(.x * .y) %>% as.double),
+                                0),
+                 
+                 # fields for the table below
+                 Lesson = as.character(NA),
+                 Score = as.character(NA)
+                 )
+
+#' @param score_i Numeric score in [0,1]
+#' @param score_png Location of graphic to save
+#' @param color Color to make the progress bar for each lesson
+#' @param message Character value - message to print on top of the progress bar
+plot_score <- function(score_i, score_png, color = 'green4', message = paste0(round(score_i*100), '%'))
+{
+    png(score_png, bg = 'transparent', height = 16, width = 100)
+    par(mar = rep(0,4))                                                       # get rid of margins
+    plot(c(0, 1), rep(1, 2), col = 'grey80', type = 'l', lwd = 17, bty = 'n', # background for score line
+         xaxt = 'n', yaxt = 'n')
+    lines(c(0, score_i), rep(1, 2), col = color, lwd = 17)                    # line from 0 to score
+    text(0.5, 1, message)                                                     # percentage
+    dev.off()
+}
+
+# Edit READMEs generated during checks to add feedback
+for(l in 1:nrow(checks)) # for each lesson
+{
+  module_path <- paste0('Modules/', checks$modules[l], '/')
+  gh_url <- ifelse(branch == 'main',
+                   'tree/main/',
+                   '')
+  
+  # label if they haven't started the exercise
+  if(!checks$started[l])
+  {
+    plot_score(1,
+               paste0(module_path, 'score0.png'),
+               color = rgb(.5,1,1),
+               message = 'Not Started')
+    next
+  }
+  
+  # label if there is an issue rendering the file
+  if(!checks$submission_renders[l])
+  {
+    plot_score(1,
+               paste0(module_path, 'score0.png'),
+               color = 'orange',
+               message = 'Error')
+  }else{
+  
+    # over-all score
+    plot_score(checks$score[l],
+               paste0(module_path, 'score0.png'))
+  
+    # read in rendered output
+    f_md <- paste0(module_path, 'README.md')
+    out_md <- readLines(f_md)
+  
+    # identify challenges
+    challenges <- grepl('#### Challenge', out_md) %>%
+      which()
+  
+    # double check that we have the correct number of challenges
+    if(length(challenges) != length(checks$code_sim[[l]]))
+    {
+      warning("Number of challenges aren't equal to number of solutions")
+      plot_score(1,
+                 paste0(module_path, 'score0.png'),
+                 color = 'orange',
+                 message = 'Error')
+    }else{
+  
+      for(i in 1:length(checks$code_sim[[l]])) # for each challenge in lesson `l`
+      {
+        # make graphic
+        plot_score(with(checks, code_sim[[l]][i] * text_sim[[l]][i]),
+                   paste0(module_path, 'score', i, '.png'))
+    
+        # add graphic to readme
+        out_md[challenges[i]] <- paste0(out_md[challenges[i]], ' <img src="score', i, '.png">')
+      }
+    }
+  }  
+  # create table
+  checks$Lesson[l] <- gsub('-', ' ', checks$modules[l])
+  checks$Score[l] <- paste0('<a href="', gh_url, module_path, '"><img src="', gh_url, module_path, 'score0.png"></a>')
+  
+  # write changes
+  cat(out_md, file = f_md, sep = '\n')
+}
+```
+
+```{r}
+#| echo: false
+
+if(any(!is.na(checks$Lesson)))
+  filter(checks, !is.na(Lesson)) %>%
+  select(Lesson, Score) %>%
+  kable(align = c('l', 'c'))
+```

@@ -1,0 +1,94 @@
+---
+title: "Data frames with tidyr"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+editor: visual
+---
+
+The exercises in this document follow along closely with [Lesson 14](https://swcarpentry.github.io/r-novice-gapminder/14-tidyr/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+::: callout-tip
+## Key Points
+
+-   Use the `tidyr` package to change the layout of data frames.
+
+-   Use `pivot_longer()` to go from wide to longer layout.
+
+-   Use `pivot_wider()` to go from long to wider layout.
+:::
+
+```{r}
+#| include: false
+library(gapminder)
+data(gapminder)
+
+library(dplyr)
+library(tidyr)
+options(dplyr.summarise.inform = FALSE)
+```
+
+#### Challenge 1
+
+Is gapminder a purely long, purely wide, or some intermediate format?
+
+<!-- Challenge 1 answer begin -->
+
+
+<!-- Challenge 1 answer end -->
+
+#### gap_wide vs gap_long vs gapminder
+
+The `gap_wide` data set is formatted such that there is only one row per country.
+
+```{r}
+library(readr)
+gap_wide <- read_csv('https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_wide.csv')
+gap_wide
+```
+
+The `gap_long` data set is formatted such that there is one row per data point.
+
+```{r}
+gap_long <- gap_wide %>%
+  pivot_longer(
+    cols = c(starts_with('pop'), 
+             starts_with('lifeExp'),
+             starts_with('gdpPercap')),
+    names_to = "obstype_year", 
+    values_to = "obs_values") %>%
+    
+    separate(obstype_year, into = c('obstype', 'year'), sep = '_')
+gap_long
+```
+
+Both formats cover the extreme ends of the spectrum of how we could format this in a tidy way. The intermediate format provided by `data(gapminder)` is probably more useful in most situations.
+
+```{r}
+gapminder
+```
+
+#### Challenge 2
+
+Using `gap_long`, calculate the mean life expectancy, population, and gdpPercap for each continent. **Hint:** use the `group_by()` and `summarize()` functions we learned in the `dplyr` lesson
+
+<!-- Challenge 2 answer begin -->
+
+```{r}
+# insert code here
+```
+
+<!-- Challenge 2 answer end -->
+
+#### Challenge 3
+
+Create a `gap_ludicrously_wide` format data by pivoting over countries, year and the 3 metrics? **Hint** this new data frame should only have 5 rows.
+
+<!-- Challenge 3 answer begin -->
+
+```{r}
+# insert code here
+```
+
+<!-- Challenge 3 answer end -->

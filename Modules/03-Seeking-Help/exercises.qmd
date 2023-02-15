@@ -1,0 +1,60 @@
+---
+title: "Seeking Help"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+editor: visual
+---
+
+The exercises in this document follow along closely with [Lesson 3](https://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+### [Seeking Help](https://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/index.html)
+
+::: callout-tip
+## Key Points
+
+Use `help()` or `?` to get help in R.
+:::
+
+#### Challenge 1
+
+Look at the help page for `c`. What kind of vector do you expect will be creeated if you evaluate the following?
+
+```{r}
+c(1, 2, 3)
+c('d', 'e', 'f')
+c(1, 2, 'f')
+```
+
+<!-- Challenge 1 answer begin -->
+
+Your answer goes here
+
+<!-- Challenge 1 answer end -->
+
+#### Challenge 2
+
+Look at the help for the `paste` function. You will need to use it later. What's the difference between the `sep` and `collapse` arguments?
+
+<!-- Challenge 2 answer begin -->
+
+Your answer goes here
+
+<!-- Challenge 2 answer end -->
+
+#### Challenge 3
+
+Use help to find a function (and its associated parameters) that you could use to load data from a tabular file in which columns are delimited with "\t\" (tab) and the decimal point is a"." (period). This check for decimal separator is important, especially if you are working with international colleagues, because different countries have different conventions for the decimal point (i.e. comma vs period).
+
+::: {.callout-note collapse="true"}
+# Hint
+
+Use `??"read table"` to look up functions related to reading in tabular data.
+:::
+
+<!-- Challenge 3 answer begin -->
+
+Your answer goes here
+
+<!-- Challenge 3 answer end -->
