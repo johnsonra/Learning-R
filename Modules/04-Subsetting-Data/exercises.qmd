@@ -1,0 +1,218 @@
+---
+title: "Subsetting Data"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+editor: visual
+---
+
+The exercises in this document follow along closely with [Lesson 6](https://swcarpentry.github.io/r-novice-gapminder/06-data-subsetting/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+::: callout-tip
+## Key Points
+
+-   Indexing in R starts at 1, not 0.
+-   Access individual values by location using `[]`.
+-   Access slices of data using `[low:high]`.
+-   Access arbitrary sets of data using `[c(...)]`.
+-   Use logical operations and logical vectors to access subsets of data.
+:::
+
+#### Challenge 1
+
+Given the following code:
+
+```{r}
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+print(x)
+```
+
+Come up with at least 2 different commands that will produce the following output using `x`:
+
+      b   c   d 
+    6.2 7.1 4.8 
+
+<!-- Challenge 1 answer begin -->
+
+```{r}
+# your commands go here
+```
+
+<!-- Challenge 1 answer end -->
+
+#### Challenge 2
+
+Given the following code:
+
+```{r}
+x <- c(5.4, 6.2, 7.1, 4.8, 7.5)
+names(x) <- c('a', 'b', 'c', 'd', 'e')
+print(x)
+```
+
+Write a subsetting command to return the values in x that are greater than 4 and less than 7.
+
+<!-- Challenge 2 answer begin -->
+
+```{r}
+# your command goes here
+```
+
+<!-- Challenge 2 answer end -->
+
+#### Challenge 3
+
+Selecting elements of a vector that match any of a list of components is a very common data analysis task. For example, the gapminder data set contains `country` and `continent` variables, but no information between these two scales. Suppose we want to pull out information from southeast Asia: how do we set up an operation to produce a logical vector that is `TRUE` for all of the countries in southeast Asia and `FALSE` otherwise?
+
+Suppose you have these data:
+
+```{r}
+seAsia <- c("Myanmar","Thailand","Cambodia","Vietnam","Laos")
+## load the gapminder data that we introduced last week
+library(gapminder)
+data(gapminder)
+## extract the `country` column from a data frame (we'll see this later);
+## convert from a factor to a character;
+## and get just the non-repeated elements
+countries <- unique(as.character(gapminder$country))
+```
+
+Another way to do this, is using the `%>%` operator from the `magrittr` package, which I find much easier to read than cramming everything on a single line.
+
+```{r}
+library(magrittr)
+countries <- gapminder$country %>% ## extract the `country` column from a data frame
+  as.character() %>%               ## convert from a factor to a character;
+  unique()                         ## and get just the non-repeated elements
+```
+
+There's a wrong way (using only `==`), which will give you a warning; a clunky way (using the logical operators `==` and `|`); and an elegant way (using `%in%`). See whether you can come up with all three and explain how they (don't) work.
+
+<!-- Challenge 3 answer begin -->
+
+```{r}
+# wrong way to subset `countries`
+# clunky way to subset `countries`
+# elegant way to subset `countries`
+```
+
+<!-- Challenge 3 answer end -->
+
+#### Challenge 4
+
+Given the following code:
+
+```{r}
+m <- matrix(1:18, nrow=3, ncol=6)
+print(m)
+```
+
+Which of the following commands will extract the values 11 and 14?
+
+A. `m[2,4,2,5]`
+
+B. `m[2:5]`
+
+C. `m[4:5,2]`
+
+D. `m[2,c(4,5)]`
+
+<!-- Challenge 4 answer begin -->
+
+A, B, C, or D?
+
+<!-- Challenge 4 answer end -->
+
+#### Challenge 5
+
+Given the following code:
+
+```{r}
+xlist <- list(a = "Software Carpentry", b = 1:10, data = head(mtcars))
+```
+
+Using your knowledge of both list and vector subsetting, extract the number 2 from `xlist`. Hint: the number 2 is contained within the "b" item in the list.
+
+<!-- Challenge 5 answer begin -->
+
+```{r}
+# your answer goes here
+```
+
+<!-- Challenge 5 answer end -->
+
+#### Challenge 6
+
+Given a linear model:
+
+```{r}
+mod <- aov(pop ~ lifeExp, data=gapminder)
+```
+
+Extract the residual degrees of freedom (hint: `attributes()` will help you)
+
+<!-- Challenge 6 answer begin -->
+
+```{r}
+# your answer goes here
+```
+
+<!-- Challenge 6 answer end -->
+
+#### Challenge 7
+
+Fix each of the following common data frame subsetting errors:
+
+<!-- Challenge 7 answer begin -->
+
+-   Extract observations collected for the year 1957
+
+```{r}
+gapminder[gapminder$year = 1957,]
+```
+
+-   Extract all columns except 1 through to 4
+
+```{r}
+gapminder[,-1:4]
+```
+
+-   Extract the rows where the life expectancy is longer the 80 years
+
+```{r}
+gapminder[gapminder$lifeExp > 80]
+```
+
+-   Extract the first row, and the fourth and fifth columns (`continent` and `lifeExp`).
+
+```{r}
+gapminder[1, 4, 5]
+```
+
+-   Advanced: extract rows that contain information for the years 2002 and 2007
+
+```{r}
+gapminder[gapminder$year == 2002 | 2007,]
+```
+
+<!-- Challenge 7 answer end -->
+
+#### Challenge 8
+
+1.  Why does `gapminder[1:20]` return an error? How does it differ from `gapminder[1:20, ]`?
+
+<!-- Challenge 8a answer begin -->
+
+<!-- Challenge 8a answer end -->
+
+2.  Create a new `data.frame` called `gapminder_small` that only contains rows 1 through 9 and 19 through 23. You can do this in one or two steps.
+
+<!-- Challenge 8b answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 8b answer end -->

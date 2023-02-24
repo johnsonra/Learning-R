@@ -1,0 +1,122 @@
+---
+title: "Graphics with ggplot2"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+editor: visual
+---
+
+The exercises in this document follow along closely with [Lesson 8](https://swcarpentry.github.io/r-novice-gapminder/08-plot-ggplot2/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+::: callout-tip
+## Key Points
+
+-   Use ggplot2 to create plots.
+-   Think about graphics in layers: aesthetics, geometry, statistics, scale transformation, and grouping.
+:::
+
+```{r}
+#| include: false
+library(gapminder)
+data(gapminder)
+
+library(ggplot2)
+library(cowplot)
+theme_set(theme_cowplot())
+
+# load colorblind friendly color paletts
+source('https://tinyurl.com/wjm6ryj')
+```
+
+#### Challenge 1
+
+Modify the example so that the figure shows how life expectancy has changed over time:
+
+<!-- Challenge 1 answer begin -->
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) + geom_point()
+```
+
+<!-- Challenge 1 answer end -->
+
+#### Challenge 2
+
+In the previous examples and challenge we've used the `aes` function to tell the scatterplot **geom** about the **x** and **y** locations of each point. Another *aesthetic* property we can modify is the point *color*. Modify the code from the previous challenge to **color** the points by the "continent" column. What trends do you see in the data? Are they what you expected?
+
+<!-- Challenge 2 answer begin -->
+
+```{r}
+# you code goes here
+```
+
+<!-- Challenge 2 answer end -->
+
+#### Challenge 3
+
+Here is a demonstration of drawing points *on top of* lines.
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, by=country)) +
+  geom_line(mapping = aes(color=continent)) + 
+  geom_point() +
+  scale_color_manual(values = cbbPalette)
+```
+
+Switch the order of the point and line layers from the previous example. What happened?
+
+<!-- Challenge 3 answer begin -->
+
+```{r}
+# Your code goes here
+```
+
+<!-- Challenge 3 answer end -->
+
+#### Challenge 4
+
+We can fit a simple relationship to the data by adding another layer, `geom_smooth`:
+
+```{r}
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(alpha = 0.5) + 
+  scale_x_log10() +
+  geom_smooth(method="lm", size=1.5)
+```
+
+Modify the color and size of the points on the point layer in the previous example.
+
+Hint: do not use the `aes` function.
+
+<!-- Challenge 4a answer begin -->
+
+```{r}
+# Your code goes here
+```
+
+<!-- Challenge 4a answer end -->
+
+Modify your solution above so that the points are now a different shape and are colored by continent with new trendlines. Hint: The **color** argument can be used inside the aesthetic.
+
+<!-- Challenge 4b answer begin -->
+
+```{r}
+# Your code goes here
+```
+
+<!-- Challenge 4b answer end -->
+
+#### Challenge 5
+
+1.  Generate boxplots to compare life expectancy between the different continents during the available years.
+2.  Rename y axis as Life Expectancy.
+3.  Remove x axis labels.
+
+<!-- Challenge 5 answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 5 answer end -->

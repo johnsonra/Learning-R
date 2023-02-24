@@ -1,0 +1,97 @@
+---
+title: "Joining Tables"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+editor: visual
+---
+
+The exercises in this document follow along closely with the [Joining tables](https://uclouvain-cbio.github.io/WSBIM1207/sec-join.html) chapter of [Introduction to Bioinformatics](https://uclouvain-cbio.github.io/WSBIM1207/index.html), under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see:
+
+> Laurent Gatto, Kevin Missault, Manon Martin & Axelle Loriot. (2021, September 24). UCLouvain-CBIO/WSBIM1207: Introduction to bioinformatics (Version v2.0.0). Zenodo. DOI: [10.5281/zenodo.5532658](https://doi.org/10.5281/zenodo.5532658).
+
+<!-- see also https://github.com/UCLouvain-CBIO/WSBIM1207/blob/47465271c0ffc4eac5dd476779a1e5a759a6922e/50-joining-tables.Rmd for the exact version referred to here -->
+
+::: callout-tip
+## Key Points
+
+-   Join tables of data in R
+:::
+
+```{r}
+#| include: false
+if(FALSE)
+{
+    # use this code to install the package we're using for this lesson
+    BiocManager::install("UCLouvain-CBIO/rWSBIM1207")
+}
+library("rWSBIM1207")
+data(jdf)
+
+library(dplyr)
+```
+
+#### Challenge 1
+
+Using the `full_join` function, join tables `jdf4` and `jdf5`. What has happened for observations `P26039` and `P02468`?
+
+<!-- Challenge 1 answer begin -->
+
+```{r}
+# Insert code here
+```
+
+<!-- Challenge 1 answer end -->
+
+#### Challenge 2
+
+Join tables `jdf4` and `jdf5`, keeping only observations in `jdf4`.
+
+<!-- Challenge 2 answer begin -->
+
+```{r}
+# Insert code here
+```
+
+<!-- Challenge 2 answer end -->
+
+#### Challenge 3
+
+Join tables `jdf4` and `jdf5`, keeping only observations in `jdf5`.
+
+<!-- Challenge 3 answer begin -->
+
+```{r}
+# Insert code here
+```
+
+<!-- Challenge 3 answer end -->
+
+#### Challenge 4
+
+Join tables `jdf4` and `jdf5`, keeping observations observed in both tables.
+
+<!-- Challenge 4 answer begin -->
+
+```{r}
+# Insert code here
+```
+
+<!-- Challenge 4 answer end -->
+
+#### Challenge 5
+
+Given the inner join,
+
+```{r}
+inner_join(jdf6, jdf7)
+```
+
+interpret the result, where both tables have duplicated keys.
+
+<!-- Challenge 5 answer begin -->
+
+*insert answer here*
+
+<!-- Challenge 5 answer end -->

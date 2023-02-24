@@ -1,0 +1,111 @@
+---
+title: "Vectorization"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+editor: visual
+---
+
+The exercises in this document follow along closely with [Lesson 9](https://swcarpentry.github.io/r-novice-gapminder/09-vectorization/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+::: callout-tip
+## Key Points
+
+-   Use vectroized options instead of loops
+:::
+
+```{r}
+library(gapminder)
+data(gapminder)
+
+library(ggplot2)
+library(cowplot)
+theme_set(theme_cowplot())
+
+library(magrittr)
+```
+
+#### Challenge 1
+
+Make a new column in the `gapminder` data frame that contains population in units of millions of people. Check the head or tail of the data frame to make sure it worked.
+
+<!-- Challenge 1 answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 1 answer end -->
+
+#### Challenge 2
+
+On a single graph, plot population, in millions, against year, for all countries. Do not worry about identifying which country is which.
+
+<!-- Challenge 2a answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 2a answer end -->
+
+Repeat the exercise, graphing only for China, India, and Indonesia. Again, do not worry about which is which.
+
+<!-- Challenge 2b answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 2b answer end -->
+
+#### Challenge 3
+
+Given the following matrix:
+
+```{r}
+m <- matrix(1:12, nrow=3, ncol=4)
+m
+```
+
+Write down what you think will happen when you run:
+
+-   `m ^ -1`
+-   `m * c(1, 0, -1)`
+-   `m > c(0, 20)`
+-   `m * c(1, 0, -1, 2)`
+
+Did you get the output you expected? If not and the video didn't clear things up, let me know and we can discuss.
+
+<!-- Challenge 3 answer begin -->
+
+Your answer goes here.
+
+<!-- Challenge 3 answer end -->
+
+#### Challenge 4
+
+We're interested in looking at the sum of the following sequence of fractions:
+
+    x = 1/(1^2) + 1/(2^2) + 1/(3^2) + ... + 1/(n^2)
+
+This would be tedious to type out, and impossible for high values of $n$. Use vectorization to compute $x$ when $n=100$.
+
+<!-- Challenge 4a answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 4a answer end -->
+
+What is the sum when $n=10,000$?
+
+<!-- Challenge 4b answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 4b answer end -->

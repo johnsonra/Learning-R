@@ -1,0 +1,103 @@
+---
+title: "RStudio Intro"
+format: 
+  gfm:
+    output-file: "README"
+    output-ext: "md"
+editor: visual
+---
+
+The exercises in this document follow along closely with [Lesson 7](https://swcarpentry.github.io/r-novice-gapminder/07-control-flow/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+::: callout-tip
+## Key Points
+
+-   Use if and else to make choices.
+-   Use for to repeat operations.
+:::
+
+```{r}
+#| include: false
+library(gapminder)
+data(gapminder)
+
+library(magrittr)
+```
+
+#### Challenge 1
+
+Use an `if()` statement to print a suitable message reporting whether there are any records from 2002 in the `gapminder` dataset.
+
+<!-- Challenge 1a answer begin -->
+
+```{r}
+# you code goes here
+```
+
+<!-- Challenge 1a answer end -->
+
+Now do the same for 2012.
+
+<!-- Challenge 1b answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 1b answer end -->
+
+#### Challenge 2
+
+Given `output_vector` and `output_vector2`:
+
+```{r}
+output_vector <- c()
+for (i in 1:5) {
+  for (j in c('a', 'b', 'c', 'd', 'e')) {
+    temp_output <- paste(i, j)
+    output_vector <- c(output_vector, temp_output)
+  }
+}
+output_matrix <- matrix(nrow = 5, ncol = 5)
+j_vector <- c('a', 'b', 'c', 'd', 'e')
+for (i in 1:5) {
+  for (j in 1:5) {
+    temp_j_value <- j_vector[j]
+    temp_output <- paste(i, temp_j_value)
+    output_matrix[i, j] <- temp_output
+  }
+}
+output_vector2 <- as.vector(output_matrix)
+```
+
+Compare the objects `output_vector` and `output_vector2`. Are they the same? If not, why not? How would you change the last block of code to make `output_vector2` the same as `output_vector`?
+
+<!-- Challenge 2 answer begin -->
+
+Code and/or text answer goes here.
+
+<!-- Challenge 2 answer end -->
+
+#### Challenge 3
+
+Write a script that loops through the `gapminder` data by continent and prints out whether the mean life expectancy is smaller or larger than 50 years.
+
+<!-- Challenge 3 answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 3 answer end -->
+
+#### Challenge 4
+
+Modify the script from Challenge 3 to loop over each country. This time print out whether the life expectancy is smaller than 50, between 50 and 70, or greater than 70.
+
+<!-- Challenge 4 answer begin -->
+
+```{r}
+# your code goes here
+```
+
+<!-- Challenge 4 answer end -->

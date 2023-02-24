@@ -7,7 +7,7 @@ format:
 editor: visual
 ---
 
-The exercises in this document follow along closely with [Lesson 1](https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community and is licensed under [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/) by [The Carpentries](https://carpentries.org/).
+The exercises in this document follow along closely with [Lesson 1](https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
 
 ::: callout-tip
 ## Key Points
@@ -73,9 +73,11 @@ See code output above.
 Run the code from the previous challenge, and write a command to compare `mass` to `age`. Is mass larger than age?
 
 <!-- Challenge 3 answer begin -->
+
 ```{r}
 mass < age
 ```
+
 <!-- Challenge 3 answer end -->
 
 #### Challenge 4
@@ -84,10 +86,12 @@ Clean up your working environment by deleting the mass and age variables.
 
 
 <!-- Challenge 4 answer begin -->
+
 ```{r}
 rm(mass, age)
 ls()
 ```
+
 <!-- Challenge 4 answer end -->
 
 #### Challenge 5
@@ -95,10 +99,12 @@ ls()
 Install the following packages: `ggplot2`, `dplyr`, `gapminder`
 
 <!-- Challenge 5 answer begin -->
+
 ```{r}
 # this will fail if the required packages are not installed
 library(ggplot2)
 library(dplyr)
 library(gapminder)
 ```
+
 <!-- Challenge 5 answer end -->

@@ -9,6 +9,23 @@ format:
 <!-- This file is not intended to be edited -->
 <!-- Progress updates will be rendered automatically when pushing to GitHub -->
 
+## Setup
+
+You'll want to install the following prior to starting this course:
+
+* [R and RStudio](https://posit.co/download/rstudio-desktop/)
+* [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [Sourcetree](https://www.sourcetreeapp.com/) (there are other git GUIs that are good - my favorite is [GitKraken](https://www.gitkraken.com/) but I recommend starting here)
+  * You'll also need a [Bitbucket](https://bitbucket.org/) account to use Sourcetree (you can use both free of charge).
+  * You may find [Setting up Sourcetree on Windows]() or [Setting up Sourcetree on a Mac]() helpful.
+
+On a related note, if you are a student (i.e. if you must have a '.edu' email and a student ID card), you should check out the [GitHub Student Developer Pack](https://education.github.com/pack). It comes with all sorts of freebies and discounts for developer tools including things like training, GitHub Pro, JetBrains, Microsoft Azure, Codespaces, and GitKraken.
+
+Once you have the required software, fork this repository and clone it to your computer as described in [Setting up your computer for Learning R]().
+
+
+## Your progress
+
 ```{r}
 #| include: false
 
@@ -16,18 +33,20 @@ library(dplyr)
 library(purrr)
 
 library(LearnR) # devtools::install_github('johnsonra/LearnR')
+library(SnowballC)
 library(quarto)
 
 library(knitr)
 
 
-# sample solutions base (use specific commit to keep things consistent with forks)
+# sample solutions base (solutions branch)
+# (use specific commit to keep things consistent with forks)
 # add file path to this to get raw file content
-solution_sha <- '2d96b8d2d157fd887510ce28e504aaa3a925fdbd'
+solution_sha <- '50a4bac93ba6c6b6f0eb6aafb0ceded1377fea71'
 solution_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/', solution_sha, '/')
 
-# starter code base
-starter_sha <- '97ca9884ce7e0db3052b15ecab24d03b646ff67b'
+# starter code base (main branch)
+starter_sha <- '141f8fb782c814de3c76a8005d38be8e6837eb3e'
 starter_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/', starter_sha, '/')
 
 # current branch
@@ -49,7 +68,7 @@ checks <- tibble(modules = system('ls Modules', intern = TRUE),
                    submission_file <- readLines(.y)
                    
                    length(starter_file) != length(submission_file) |
-                      any(starter_file  !=        submission_file)
+                      any(starter_file  !=        submission_file[1:length(starter_file)])
                  }),
                    
                  # only parse these if they have submitted an update to this file
@@ -61,7 +80,9 @@ checks <- tibble(modules = system('ls Modules', intern = TRUE),
                  # double check that the solution renders - if not, we'll count it as incomplete
                  submission_renders = ifelse(started,
                                              map_lgl(modules, ~ {
-                                               val <- try(quarto_render(paste0('Modules/', .x, '/exercises.qmd')), silent = TRUE)
+                                               val <- try(quarto_render(paste0('Modules/', .x, '/exercises.qmd'), cache_refresh = TRUE), silent = TRUE)
+                                               file.path('Modules', .x, 'exercises_cache') %>%
+                                                 unlink(recursive = TRUE)
                                                return(class(val) != 'try-error')
                                                }),
                                              FALSE),
@@ -91,19 +112,42 @@ checks <- tibble(modules = system('ls Modules', intern = TRUE),
                  Score = as.character(NA)
                  )
 
+#' plot_score
+#' Plot a score and save the image for insertion into markdown document
 #' @param score_i Numeric score in [0,1]
 #' @param score_png Location of graphic to save
 #' @param color Color to make the progress bar for each lesson
 #' @param message Character value - message to print on top of the progress bar
 plot_score <- function(score_i, score_png, color = 'green4', message = paste0(round(score_i*100), '%'))
 {
-    png(score_png, bg = 'transparent', height = 16, width = 100)
-    par(mar = rep(0,4))                                                       # get rid of margins
-    plot(c(0, 1), rep(1, 2), col = 'grey80', type = 'l', lwd = 17, bty = 'n', # background for score line
-         xaxt = 'n', yaxt = 'n')
-    lines(c(0, score_i), rep(1, 2), col = color, lwd = 17)                    # line from 0 to score
-    text(0.5, 1, message)                                                     # percentage
-    dev.off()
+  png(score_png, bg = 'transparent', height = 16, width = 100)
+  par(mar = rep(0,4))                                                       # get rid of margins
+  plot(c(0, 1), rep(1, 2), col = 'grey80', type = 'l', lwd = 17, bty = 'n', # background for score line
+       xaxt = 'n', yaxt = 'n')
+  lines(c(0, score_i), rep(1, 2), col = color, lwd = 17)                    # line from 0 to score
+  text(0.5, 1, message)                                                     # percentage
+  dev.off()
+}
+
+#' cleanup
+#' Clean up files if they haven't started, or if there is an error in their exercise code
+#' @param path Character value. Path to directory to clean up
+cleanup <- function(path)
+{
+  if(file.exists(file.path(path, 'README.md')))
+  {
+    file.path(path, 'README.md') %>%
+      file.remove()
+  }
+  
+  if(file.exists(file.path(path, 'exercises_files')))
+  {
+    file.path(path, 'exercises_files') %>%
+      unlink(recursive = TRUE)
+  }
+  
+  file.path(path, '*.pdf') %>%
+    unlink()
 }
 
 # Edit READMEs generated during checks to add feedback
@@ -113,7 +157,11 @@ for(l in 1:nrow(checks)) # for each lesson
   gh_url <- ifelse(branch == 'main',
                    'tree/main/',
                    '')
-  
+
+  # create table
+  checks$Lesson[l] <- gsub('-', ' ', checks$modules[l])
+  checks$Score[l] <- paste0('<a href="', gh_url, module_path, '"><img src="', gh_url, module_path, 'score0.png"></a>')
+
   # label if they haven't started the exercise
   if(!checks$started[l])
   {
@@ -121,6 +169,10 @@ for(l in 1:nrow(checks)) # for each lesson
                paste0(module_path, 'score0.png'),
                color = rgb(.5,1,1),
                message = 'Not Started')
+    
+    # clean up files if they haven't started
+    cleanup(module_path)
+    
     next
   }
   
@@ -131,6 +183,10 @@ for(l in 1:nrow(checks)) # for each lesson
                paste0(module_path, 'score0.png'),
                color = 'orange',
                message = 'Error')
+    
+    # clean up files if there is an error
+    cleanup(module_path)
+
   }else{
   
     # over-all score
@@ -166,9 +222,6 @@ for(l in 1:nrow(checks)) # for each lesson
       }
     }
   }  
-  # create table
-  checks$Lesson[l] <- gsub('-', ' ', checks$modules[l])
-  checks$Score[l] <- paste0('<a href="', gh_url, module_path, '"><img src="', gh_url, module_path, 'score0.png"></a>')
   
   # write changes
   cat(out_md, file = f_md, sep = '\n')
@@ -178,8 +231,16 @@ for(l in 1:nrow(checks)) # for each lesson
 ```{r}
 #| echo: false
 
-if(any(!is.na(checks$Lesson)))
+if(any(checks$started))
+{
   filter(checks, !is.na(Lesson)) %>%
   select(Lesson, Score) %>%
   kable(align = c('l', 'c'))
+}else{
+  # clean up pngs
+  map(checks$modules, ~ file.path('Modules', .x, 'score0.png') %>% file.remove())
+  
+  # add note in place of progress table
+  kable(NULL, caption = "Progress report (complete the setup instructions above and push your first completed assignment to GitHub to generate this report)")
+}
 ```
