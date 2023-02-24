@@ -6,9 +6,9 @@ The exercises in this document follow along closely with [Lesson
 of [R for Reproducible Scientific
 Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided
 by the [Software Carpentry](https://software-carpentry.org/) community
-and is licensed under [CC-BY
-4.0](https://creativecommons.org/licenses/by/4.0/) by [The
-Carpentries](https://carpentries.org/).
+under the creative commons license, [CC-BY
+4.0](https://creativecommons.org/licenses/by/4.0/). For more information
+see [The Carpentries](https://carpentries.org/).
 
 <div>
 

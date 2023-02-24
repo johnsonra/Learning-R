@@ -31,6 +31,17 @@ R]().
 
 ## Your progress
 
-| Lesson        |                                         Score                                          |
-|:--------------|:--------------------------------------------------------------------------------------:|
-| RStudio Intro | <a href="Modules/01-RStudio-Intro"><img src="Modules/01-RStudio-Intro/score0.png"></a> |
+| Lesson             |                                            Score                                            |
+|:-------------------|:-------------------------------------------------------------------------------------------:|
+| 01 RStudio Intro   |   <a href="Modules/01-RStudio-Intro/"><img src="Modules/01-RStudio-Intro/score0.png"></a>   |
+| 02 Project Intro   |   <a href="Modules/02-Project-Intro/"><img src="Modules/02-Project-Intro/score0.png"></a>   |
+| 03 Seeking Help    |    <a href="Modules/03-Seeking-Help/"><img src="Modules/03-Seeking-Help/score0.png"></a>    |
+| 04 Subsetting Data | <a href="Modules/04-Subsetting-Data/"><img src="Modules/04-Subsetting-Data/score0.png"></a> |
+| 05 Flow Control    |    <a href="Modules/05-Flow-Control/"><img src="Modules/05-Flow-Control/score0.png"></a>    |
+| 06 ggplot2         |         <a href="Modules/06-ggplot2/"><img src="Modules/06-ggplot2/score0.png"></a>         |
+| 07 Vectorization   |   <a href="Modules/07-Vectorization/"><img src="Modules/07-Vectorization/score0.png"></a>   |
+| 08 Functions       |       <a href="Modules/08-Functions/"><img src="Modules/08-Functions/score0.png"></a>       |
+| 09 Writing Data    |    <a href="Modules/09-Writing-Data/"><img src="Modules/09-Writing-Data/score0.png"></a>    |
+| 10 dplyr           |           <a href="Modules/10-dplyr/"><img src="Modules/10-dplyr/score0.png"></a>           |
+| 11 tidyr           |           <a href="Modules/11-tidyr/"><img src="Modules/11-tidyr/score0.png"></a>           |
+| 12 Joining Tables  |  <a href="Modules/12-Joining-Tables/"><img src="Modules/12-Joining-Tables/score0.png"></a>  |
