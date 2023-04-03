@@ -1,9 +1,6 @@
 ---
 title: "Graphics with ggplot2"
-format: 
-  gfm:
-    output-file: "README"
-    output-ext: "md"
+format: html
 editor: visual
 ---
 

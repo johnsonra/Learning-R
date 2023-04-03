@@ -1,9 +1,6 @@
 ---
 title: "RStudio Intro"
-format: 
-  gfm:
-    output-file: "README"
-    output-ext: "md"
+format: html
 editor: visual
 ---
 

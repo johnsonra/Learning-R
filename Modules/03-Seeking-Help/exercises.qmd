@@ -1,9 +1,6 @@
 ---
 title: "Seeking Help"
-format: 
-  gfm:
-    output-file: "README"
-    output-ext: "md"
+format: html
 editor: visual
 ---
 
