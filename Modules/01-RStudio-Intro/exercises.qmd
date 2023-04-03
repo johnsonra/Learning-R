@@ -1,9 +1,6 @@
 ---
 title: "RStudio Intro"
-format: 
-  gfm:
-    output-file: "README"
-    output-ext: "md"
+format: html
 editor: visual
 ---
 
@@ -24,14 +21,16 @@ The exercises in this document follow along closely with [Lesson 1](https://swca
 
 Which of the following are valid R variable names?
 
-    min_height
-    max.height
-    _age
-    .mass
-    MaxLength
-    min-length
-    2widths
-    celsius2kelvin
+```         
+min_height
+max.height
+_age
+.mass
+MaxLength
+min-length
+2widths
+celsius2kelvin
+```
 
 <!-- Challenge 1 answer begin -->
 
