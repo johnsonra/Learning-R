@@ -4,13 +4,14 @@ format: html
 ---
 
 <!-- This file is not intended to be edited -->
+
 <!-- Render this file to see automated progress updates on your exercises -->
 
 ## Setup
 
 You'll want to install the following prior to starting this course:
 
-* [R and RStudio](https://posit.co/download/rstudio-desktop/)
+-   [R and RStudio](https://posit.co/download/rstudio-desktop/)
 
 On a related note, if you are a student (i.e. if you must have a '.edu' email and a student ID card), you should check out the [GitHub Student Developer Pack](https://education.github.com/pack). It comes with all sorts of freebies and discounts for developer tools including things like training, GitHub Pro, JetBrains, Microsoft Azure, Codespaces, and GitKraken.
 
