@@ -67,10 +67,6 @@ Make a vector with the numbers 1 through 26 (save this vector to the variable `x
 
 #### Challenge 3
 
-<!-- Google mean height of american male
-mean_male_height = c(age20_39 = 176.1, age40_59 = 175.8, age60_ = 174.4) 
-names(mean_male_height[3] = 'age60_plus' -->
-
 What is the data type of the names of `mean_male_height`? You can find out using the `str()` or `typeof()` functions.
 
 <!-- Challenge 3 answer begin -->

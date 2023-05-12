@@ -30,6 +30,19 @@ Let's imagine that 1 cat year is equivalent to 7 human years.
 <!-- Challenge 1 answer begin -->
 
 ```{r}
+# load cats data (make sure you are in the correct working directory)
+cats <- read.csv('../04-Data-Structures/data/feline-data_v2.csv')
+cats$weight[4] <- 2.35
+cats$weight <- as.numeric(cats$weight)
+cats$age <- c(2,3,5,1)
+
+# create human_age
+## your code goes here
+
+# convert human_age to a factor
+## your code goes here
+
+# convert human_age back to a numeric vector
 ## your code goes here
 ```
 
@@ -58,7 +71,16 @@ Then use `rbind` to add an entry for someone you work with. Finally, use `cbind`
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# your code goes here
+# create people
+people <- ## your code goes here ##
+  
+# add a team member
+## your code goes here ##
+  
+# add coffee break
+## your code goes here ##
+  
+people
 ```
 
 <!-- Challenge 2 answer end -->
@@ -75,7 +97,7 @@ Searching for ones specifically in the middle isn't too hard, but we could ask f
 library(gapminder)
 data(gapminder)
 
-# your command goes here
+# your commands go here
 ```
 
 <!-- Challenge 3 answer end -->

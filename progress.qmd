@@ -32,11 +32,11 @@ library(knitr)
 # sample solutions base (solutions branch)
 # (use specific commit to keep things consistent with forks)
 # add file path to this to get raw file content
-solution_sha <- '2828ffc3dc6afe2bfa2c72d471b678eaffca27dd'
+solution_sha <- 'a91170c8cea06f5adafabebf9af1e13afe154806'
 solution_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/', solution_sha, '/')
 
 # starter code base (main branch)
-starter_sha <- '77ae57860f74350760048f1d3493a060466d22cc'
+starter_sha <- '049afd4ac5ab145c933192e533419ce765e75d5b'
 starter_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/', starter_sha, '/')
 
 
