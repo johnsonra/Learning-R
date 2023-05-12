@@ -1,0 +1,236 @@
+---
+title: "Data Structures"
+format: html
+---
+
+The exercises in this document follow along closely with [Lesson 4](https://swcarpentry.github.io/r-novice-gapminder/04-data-structures-part1.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+::: callout-tip
+## Key Points
+
+-   Use read.csv to read tabular data in R.
+-   The basic data types in R are double, integer, complex, logical, and character.
+-   Data structures such as data frames or matrices are built on top of lists and vectors, with some added attributes.
+:::
+
+#### Challenge 1
+
+An important part of every data analysis is cleaning the input data. If you know that the input data is all of the same format, (e.g. numbers), your analysis is much easier! Clean the cat data set from the chapter about type coercion.
+
+Use the starter code provided here and complete the tasks below.
+
+<!-- Challenge 1 answer begin -->
+
+```{r}
+# Read data (make sure you are in the correct working directory here!)
+cats <- read.csv("data/feline-data_v2.csv")
+
+# 1. Print the data
+cats
+
+# 2. Show an overview of the table with all data types
+str(cats)
+
+# 3. The "weight" column has the incorrect data type `chr`.
+#    The correct data type is: dbl
+
+# 4. Correct the 4th weight data point with the mean of the two given values
+cats$weight[4] <- 2.35
+
+#    print the data again to see the effect
+cats
+
+# 5. Convert the weight to the right data type
+cats$weight <- as.numeric(cats$weight)
+
+#    Calculate the mean to test yourself
+mean(cats$weight)
+
+# If you see the correct mean value (and not NA), you did the exercise
+# correctly!
+```
+
+<!-- Challenge 1 answer end -->
+
+#### Challenge 2
+
+Make a vector with the numbers 1 through 26 (save this vector to the variable `x`). Then, multiply the vector by 2.
+
+<!-- Challenge 2 answer begin -->
+
+```{r}
+x <- 1:26
+x <- x * 2
+```
+
+<!-- Challenge 2 answer end -->
+
+#### Challenge 3
+
+<!-- Google mean height of american male
+mean_male_height = c(age20_39 = 176.1, age40_59 = 175.8, age60_ = 174.4) 
+names(mean_male_height[3] = 'age60_plus' -->
+
+What is the data type of the names of `mean_male_height`? You can find out using the `str()` or `typeof()` functions.
+
+<!-- Challenge 3 answer begin -->
+
+```{r}
+mean_male_height <- c(age20_39 = 176.1, age40_59 = 175.8, age60_ = 173.4)
+
+str(mean_male_height)
+typeof(names(mean_male_height))
+```
+
+<!-- Challenge 3 answer end -->
+
+#### Challenge 4
+
+Instead of just changing some of the names a vector/list already has, you can also set all names of an object by writing code like (replace ALL CAPS text):
+
+```         
+names( OBJECT ) <-  CHARACTER_VECTOR
+```
+
+Create a vector that gives the number for each letter in the alphabet! R has a built-in object called `LETTERS`. It is a 26-character vector, from A to Z.
+
+<!-- Challenge 4 answer begin -->
+
+```{r}
+# Generate a vector called letter_no with the sequence of numbers from 1 to 26!
+letter_no <- 1:26
+
+# Set the names of the number sequence to the 26 letters in `LETTERS`.
+names(letter_no) <- LETTERS
+
+# Test yourself by calling `letter_no["B"]`, which should give you the number 2!
+letter_no["B"]
+```
+
+<!-- Challenge 4 answer end -->
+
+#### Challenge 5
+
+There are several subtly different ways to call variables, observations and elements from `data.frames`. Try out these examples and explain what is returned by each one. *Hint*: Use the function `typeof()` to examine what is returned in each case.
+
+<!-- Challenge 5 answer begin -->
+
+```{r}
+cats[1]
+```
+
+This returns the first item of cats, coat, which is the first column of cats. When using single square brackets (`[`), this will return a data.frame with one column, coat.
+
+```{r}
+cats[[1]]
+```
+
+Similarly, using double square brackets (`[[`) will return the first column of cats, however we get a character vector.
+
+```{r}
+cats$coat
+```
+
+This returns the identical character vector that we get when using double square brackets.
+
+```{r}
+cats["coat"]
+```
+
+This returns a data.frame with one column, coat. This is the same output as we get from `cats[1]`.
+
+```{r}
+cats[1, 1]
+```
+
+This returns the value of cats for the first observation and first column of the data. It is a character value, or a character vector of length 1.
+
+```{r}
+cats[, 1]
+```
+
+This will return all observations from the first column as a character vector. This is the same result as `cats$coat`.
+
+```{r}
+cats[1, ]
+```
+
+This returns the first row of cats as a data.frame.
+
+<!-- Challenge 5 answer end -->
+
+#### Challenge 6
+
+Given `matrix_example`,
+
+```{r}
+matrix_example <- matrix(0, ncol=6, nrow=3)
+```
+
+what do you think will be the result of `length(matrix_example)`? Try it. Were you right? Why / why not?
+
+<!-- Challenge 6 answer begin -->
+
+`length(matrix_example)` returns 18 because it has 18 values in the matrix (3 rows and 6 columns).
+
+<!-- Challenge 6 answer end -->
+
+#### Challenge 7
+
+Make another matrix, this time containing the numbers 1:50, with 5 columns and 10 rows. Did the matrix function fill your matrix by column, or by row, as its default behavior? See if you can figure out how to change this. (hint: read the documentation for matrix!)
+
+<!-- Challenge 7 answer begin -->
+
+```{r}
+# using matrix with default `matrix` parameters
+matrix(1:50, nrow = 10, ncol = 5)
+
+# modify the previous command to fill in the opposite order as above
+matrix(1:50, nrow = 10, ncol = 5, byrow = TRUE)
+```
+
+<!-- Challenge 7 answer end -->
+
+#### Challenge 8
+
+Create a list of length two containing a character vector for each of the sections in this part of the workshop:
+
+-   Data types
+-   Data structures
+
+Populate each character vector with the names of the data types and data structures we've seen so far.
+
+<!-- Challenge 8 answer begin -->
+
+```{r}
+list(data_types = c('logical', 'integer', 'double', 'complex', 'character', 'list'),
+     data_structures = c('vector', 'list', 'data.frame', 'matrix'))
+```
+
+<!-- Challenge 8 answer end -->
+
+#### Challenge 9
+
+Consider the R output of the matrix below:
+
+```         
+     [,1] [,2]
+[1,]    4    1
+[2,]    9    5
+[3,]   10    7
+```
+
+What was the command that generated this output? Examine each command and try to figure out the correct one before typing them. Think about what matrices the other commands will produce.
+
+1.  `matrix(c(4, 1, 9, 5, 10, 7), nrow = 3)`
+2.  `matrix(c(4, 9, 10, 1, 5, 7), ncol = 2, byrow = TRUE)`
+3.  `matrix(c(4, 9, 10, 1, 5, 7), nrow = 2)`
+4.  `matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)`
+
+<!-- Challenge 9 answer begin -->
+
+```{r}
+matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)
+```
+
+<!-- Challenge 9 answer end -->
