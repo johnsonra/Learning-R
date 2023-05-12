@@ -8,15 +8,17 @@ Welcome to this self-directed course on R and RStudio. Very little prior experie
 1. [Intro to RStudio](https://youtu.be/_98f-UMBMz4)
 2. [Project management with RStudio](https://youtu.be/IB5mmtLH7QE)
 3. [Seeking help](https://youtu.be/g-JqSPiOv6I)
-4. Subsetting data
-5. Flow and control
-6. ggplot2
-7. Vectorization
-8. Functions
-9. Writing data
-10. dplyr
-11. tidyr
-12. Joining tables
+4. Data Structures
+5. Exploring Data Frames
+6. Subsetting data
+7. Flow and control
+8. ggplot2
+9. Vectorization
+10. Functions
+11. Writing data
+12. dplyr
+13. tidyr
+14. Joining tables
 
 ## Setup
 
