@@ -26,6 +26,7 @@ We're going to turn our Learning-R project into a project in RStudio:
 3.  Click "Existing Directory" and locate the directory containing your Learning-R project.
 4.  Click the "Create Project" button.
 
+
 #### Challenge 2
 
 Open an RStudio project through the file system
@@ -39,7 +40,7 @@ Open an RStudio project through the file system
 
 <!-- Challenge 2 answer begin -->
 
-![](screenshot.png)
+![](screenshot.jpg){fig-alt="Screenshot"}
 
 <!-- Challenge 2 answer end -->
 

@@ -27,13 +27,13 @@ Use the starter code provided here and complete the tasks below.
 cats <- read.csv("data/feline-data_v2.csv")
 
 # 1. Print the data
-## your command goes here ##
+cats
 
 # 2. Show an overview of the table with all data types
-## your command goes here ##
+str(cats)
 
-# 3. The "weight" column has the incorrect data type ## your comment goes here ##.
-#    The correct data type is: ## your comment goes here ##
+# 3. The "weight" column has the incorrect data type chr.
+#    The correct data type is: num
 
 # 4. Correct the 4th weight data point with the mean of the two given values
 cats$weight[4] <- 2.35
@@ -42,7 +42,7 @@ cats$weight[4] <- 2.35
 cats
 
 # 5. Convert the weight to the right data type
-cats$weight <- ## your command goes here ##
+cats$weight <- as.numeric(cats$weight)
 
 #    Calculate the mean to test yourself
 mean(cats$weight)
@@ -60,7 +60,8 @@ Make a vector with the numbers 1 through 26 (save this vector to the variable `x
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# your commands go here
+x <- 1:26
+x * 2
 ```
 
 <!-- Challenge 2 answer end -->
@@ -72,7 +73,10 @@ What is the data type of the names of `mean_male_height`? You can find out using
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# your command goes here
+mean_male_height <- c(age20_39 = 176.1, age40_59 = 175.8, age60_plus = 173.4)
+
+str(mean_male_height) # it is a character vector
+typeof(names(mean_male_height))
 ```
 
 <!-- Challenge 3 answer end -->
@@ -91,10 +95,10 @@ Create a vector that gives the number for each letter in the alphabet! R has a b
 
 ```{r}
 # Generate a vector called letter_no with the sequence of numbers from 1 to 26!
-letter_no <- ## your command goes here ##
+letter_no <- 1:26
 
 # Set the names of the number sequence to the 26 letters in `LETTERS`.
-## your command goes here ##
+names(letter_no) <- LETTERS
 
 # Test yourself by calling `letter_no["B"]`, which should give you the number 2!
 letter_no["B"]
@@ -112,41 +116,43 @@ There are several subtly different ways to call variables, observations and elem
 cats[1]
 ```
 
-Explain output here.
+This returns the first item of cats, which is the coat variable. When using single square brackets (`[`) this will return a data.frame with a single variable or column of data. In this case a character vector, coat.
 
 ```{r}
 cats[[1]]
 ```
 
-Explain output here.
+This also returns the first item of cats, but instead of a data.frame, the use of double square brackets (`[[`) returns a charactre vector.
 
 ```{r}
 cats$coat
 ```
 
-Explain output here.
+Using a dollar sign (`$`) results in the same character vector as if we used a double square bracket.
 
 ```{r}
 cats["coat"]
 ```
 
-Explain output here.
+Using the column name, 'coat' in single square brackets (`[`) returns a data.frame with one column of data, similar to using single square brackets and a number.
 
 ```{r}
 cats[1, 1]
 ```
 
-Explain output here.
+This returns the value, 'calico', which is the first observation of the first column of data in the data.frame.
 
 ```{r}
 cats[, 1]
 ```
 
-Explain output here.
+This returns a character vector of the first column of data, including all observations or rows.
 
 ```{r}
 cats[1, ]
 ```
+
+This returns a data.frame containing all variables for the first observation.
 
 <!-- Challenge 5 answer end -->
 
@@ -162,7 +168,7 @@ what do you think will be the result of `length(matrix_example)`? Try it. Were y
 
 <!-- Challenge 6 answer begin -->
 
-Explain here.
+`length(matrix_example)` returns 18, because there are a total of 18 values in the matrix (3 rows and 6 columns).
 
 <!-- Challenge 6 answer end -->
 
@@ -174,10 +180,10 @@ Make another matrix, this time containing the numbers 1:50, with 5 columns and 1
 
 ```{r}
 # using matrix with default `matrix` parameters
-## your command goes here
+matrix(1:50, nrow = 10, ncol = 5)
 
 # modify the previous command to fill in the opposite order as above
-## your command goes here
+matrix(1:50, nrow = 10, ncol = 5, byrow = TRUE)
 ```
 
 <!-- Challenge 7 answer end -->
@@ -194,7 +200,8 @@ Populate each character vector with the names of the data types and data structu
 <!-- Challenge 8 answer begin -->
 
 ```{r}
-## you command goes here
+list(data_types = c('logical', 'integer', 'double', 'complex', 'character'),
+     data_structures = c('vector', 'list', 'data.frame', 'matrix'))
 ```
 
 <!-- Challenge 8 answer end -->
@@ -220,7 +227,7 @@ What was the command that generated this output? Examine each command and try to
 <!-- Challenge 9 answer begin -->
 
 ```{r}
-# your codmmand goes here
+matrix(c(4, 1, 9, 5, 10, 7), ncol = 2, byrow = TRUE)
 ```
 
 <!-- Challenge 9 answer end -->
