@@ -8,8 +8,8 @@ Welcome to this self-directed course on R and RStudio. Very little prior experie
 1. [Intro to RStudio](https://youtu.be/_98f-UMBMz4)
 2. [Project management with RStudio](https://youtu.be/IB5mmtLH7QE)
 3. [Seeking help](https://youtu.be/g-JqSPiOv6I)
-4. Data Structures
-5. Exploring Data Frames
+4. [Data Structures](https://youtu.be/pgfld1Wn_Ts)
+5. [Exploring Data Frames](https://youtu.be/0839BchBlzM)
 6. Subsetting data
 7. Flow and control
 8. ggplot2
