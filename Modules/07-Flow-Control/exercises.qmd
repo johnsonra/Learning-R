@@ -28,7 +28,10 @@ Use an `if()` statement to print a suitable message reporting whether there are 
 <!-- Challenge 1a answer begin -->
 
 ```{r}
-# you code goes here
+if(any(gapminder$year == 2002))
+{
+  print('there are observations from 2002')
+}
 ```
 
 <!-- Challenge 1a answer end -->
@@ -38,7 +41,10 @@ Now do the same for 2012.
 <!-- Challenge 1b answer begin -->
 
 ```{r}
-# your code goes here
+if(any(gapminder$year == 2012))
+{
+  print('there are observations from 2012')
+}
 ```
 
 <!-- Challenge 1b answer end -->
@@ -55,6 +61,7 @@ for (i in 1:5) {
     output_vector <- c(output_vector, temp_output)
   }
 }
+
 output_matrix <- matrix(nrow = 5, ncol = 5)
 j_vector <- c('a', 'b', 'c', 'd', 'e')
 for (i in 1:5) {
@@ -71,7 +78,16 @@ Compare the objects `output_vector` and `output_vector2`. Are they the same? If 
 
 <!-- Challenge 2 answer begin -->
 
-Code and/or text answer goes here.
+```{r}
+for (i in 1:5) {
+  for (j in 1:5) {
+    temp_j_value <- j_vector[j]
+    temp_output <- paste(i, temp_j_value)
+    output_matrix[j, i] <- temp_output
+  }
+}
+output_vector2 <- as.vector(output_matrix)
+```
 
 <!-- Challenge 2 answer end -->
 
@@ -82,7 +98,21 @@ Write a script that loops through the `gapminder` data by continent and prints o
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# your code goes here
+for(i in levels(gapminder$continent))
+{
+  mean_lifeExp <- gapminder[gapminder$continent == i,'lifeExp'] %>%
+    unlist() %>%
+    mean()
+  
+  if(mean_lifeExp >= 50)
+  {
+    paste(i, 'has a mean life expectancy greater than 50 years') %>%
+      print()
+  }else{
+    paste(i, 'has a mean life expectancy less than 50 years') %>%
+      print()
+  }
+}
 ```
 
 <!-- Challenge 3 answer end -->
@@ -94,7 +124,24 @@ Modify the script from Challenge 3 to loop over each country. This time print ou
 <!-- Challenge 4 answer begin -->
 
 ```{r}
-# your code goes here
+for(i in levels(gapminder$country))
+{
+  mean_lifeExp <- gapminder[gapminder$country == i,'lifeExp'] %>%
+    unlist() %>%
+    mean()
+  
+  if(mean_lifeExp < 50)
+  {
+    paste(i, 'has a mean life expectancy less than 50 years') %>%
+      print()
+  }else if(mean_lifeExp < 70){
+    paste(i, 'has a mean life expectancy between 50 and 70 years') %>%
+      print()
+  }else{
+    paste(i, 'has a mean life expectancy greater than 70 years') %>%
+      print()
+  }
+}
 ```
 
 <!-- Challenge 4 answer end -->
