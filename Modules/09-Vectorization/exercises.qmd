@@ -50,6 +50,8 @@ ggplot(gapminder, aes(year, pop_mill)) +
 
 <!-- Challenge 2a answer end -->
 
+#### Challenge 2b
+
 Repeat the exercise, graphing only for China, India, and Indonesia. Again, do not worry about which is which.
 
 #### Challenge 2b
