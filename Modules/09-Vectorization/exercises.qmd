@@ -30,29 +30,40 @@ Make a new column in the `gapminder` data frame that contains population in unit
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-# your code goes here
+gapminder$pop_mill <- gapminder$pop / 1e6
 ```
 
 <!-- Challenge 1 answer end -->
 
-#### Challenge 2
+#### Challenge 2a
 
 On a single graph, plot population, in millions, against year, for all countries. Do not worry about identifying which country is which.
 
 <!-- Challenge 2a answer begin -->
 
 ```{r}
-# your code goes here
+ggplot(gapminder, aes(year, pop_mill)) +
+  geom_point() +
+  labs(x = 'Year',
+       y = 'Population (millions)')
 ```
 
 <!-- Challenge 2a answer end -->
 
+#### Challenge 2b
+
 Repeat the exercise, graphing only for China, India, and Indonesia. Again, do not worry about which is which.
+
+#### Challenge 2b
 
 <!-- Challenge 2b answer begin -->
 
 ```{r}
-# your code goes here
+gapminder[gapminder$country %in% c('China', 'India', 'Indonesia'),] %>%
+  ggplot(aes(year, pop_mill)) +
+  geom_point() +
+  labs(x = 'Year',
+       y = 'Population (millions)')
 ```
 
 <!-- Challenge 2b answer end -->
@@ -77,11 +88,17 @@ Did you get the output you expected? If not and the video didn't clear things up
 
 <!-- Challenge 3 answer begin -->
 
-Your answer goes here.
+-   `m^-1` divides all the values in `m` by 1.
+
+-   `m * c(1, 0, -1)` will recycle the values in the vector on the right, resulting in row 1 being multiplied by 1, row two being multiplied by 0, and row 3 being multiplied by -1.
+
+-   `m > c(0, 20)` will recycle the values in the vector on the right. The values in `m` will be compared one column at a time. Since it is of length 2, this will not result in the same comparison being made across each row.
+
+-   `m * c(1, 0, -1, 2)` will recycle the values in the vector on the right. The values in `m` will be compared one column at a time, so the first column will be multiplied by `c(1, 0, -1)` and the first value of the second column will be multiplied by 2. The next two values of column 2 will be multiplied by `c(1, 0)` with the first two values of column 3 being multiplied by `c(-1, 2)`, and so forth.
 
 <!-- Challenge 3 answer end -->
 
-#### Challenge 4
+#### Challenge 4a
 
 We're interested in looking at the sum of the following sequence of fractions:
 
@@ -94,17 +111,21 @@ This would be tedious to type out, and impossible for high values of $n$. Use ve
 <!-- Challenge 4a answer begin -->
 
 ```{r}
-# your code goes here
+sum( 1 / (1:100)^2 )
 ```
 
 <!-- Challenge 4a answer end -->
+
+#### Challenge 4b
 
 What is the sum when $n=10,000$?
 
 <!-- Challenge 4b answer begin -->
 
 ```{r}
-# your code goes here
+n <- 1e4
+
+sum(1 / (1:n)^2 )
 ```
 
 <!-- Challenge 4b answer end -->

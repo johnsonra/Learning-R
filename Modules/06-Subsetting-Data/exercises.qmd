@@ -210,7 +210,7 @@ gapminder[gapminder$year == 2002 | gapminder$year == 2007,]
 
 <!-- Challenge 7 answer end -->
 
-#### Challenge 8
+#### Challenge 8a
 
 1.  Why does `gapminder[1:20]` return an error? How does it differ from `gapminder[1:20, ]`?
 
@@ -219,6 +219,8 @@ gapminder[gapminder$year == 2002 | gapminder$year == 2007,]
 The first statement asks R to return the first twenty columns of gapminder, while the second statement asks R for the first twenty rows.
 
 <!-- Challenge 8a answer end -->
+
+#### Challenge 8b
 
 2.  Create a new `data.frame` called `gapminder_small` that only contains rows 1 through 9 and 19 through 23. You can do this in one or two steps.
 

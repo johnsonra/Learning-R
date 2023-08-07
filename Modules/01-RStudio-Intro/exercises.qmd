@@ -1,6 +1,6 @@
 ---
 title: "RStudio Intro"
-format: docx
+format: html
 editor: visual
 ---
 

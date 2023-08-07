@@ -21,7 +21,7 @@ data(gapminder)
 library(magrittr)
 ```
 
-#### Challenge 1
+#### Challenge 1a
 
 Use an `if()` statement to print a suitable message reporting whether there are any records from 2002 in the `gapminder` dataset.
 
@@ -35,6 +35,8 @@ if(any(gapminder$year == 2002))
 ```
 
 <!-- Challenge 1a answer end -->
+
+#### Challenge 1b
 
 Now do the same for 2012.
 
