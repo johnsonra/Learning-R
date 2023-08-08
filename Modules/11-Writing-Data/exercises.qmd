@@ -28,8 +28,8 @@ library(cowplot)
 theme_set(theme_cowplot())
 
 # get path to this directory
-module9 <- system('git rev-parse --show-toplevel', intern = TRUE) %>%
-  file.path('Modules', '09-Writing-Data')
+module11 <- system('git rev-parse --show-toplevel', intern = TRUE) %>%
+  file.path('Modules', '11-Writing-Data')
 ```
 
 #### Challenge 1
@@ -39,7 +39,7 @@ Modify the code below to print a second page in the pdf, showing a facet plot (h
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-pdf(file.path(module9, "Life_Exp_vs_time.pdf"), width=12, height=4)
+pdf(file.path(module11, "Life_Exp_vs_time.pdf"), width=12, height=4)
 
 ggplot(gapminder, aes(year, lifeExp, color=country)) +
   geom_line() +
