@@ -8,3 +8,6 @@ libs/
 *.html
 *.png
 *.jpg
+*.pdf
+
+*.csv
