@@ -23,6 +23,10 @@ library(dplyr)
 library(purrr)
 
 library(LearnR) # devtools::install_github('johnsonra/LearnR')
+# check that we are running the most recent version of LearnR
+if(sessionInfo()$otherPkgs$LearnR$Version != "1.0-2")
+    warning('Check your version of LearnR. A newer version may be available')
+
 library(SnowballC)
 library(quarto)
 
