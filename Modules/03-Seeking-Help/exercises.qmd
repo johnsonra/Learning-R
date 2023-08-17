@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-The exercises in this document follow along closely with [Lesson 3](https://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+The exercises in this document follow along closely with [Lesson 3](https://swcarpentry.github.io/r-novice-gapminder/03-seeking-help.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
 
 ### [Seeking Help](https://swcarpentry.github.io/r-novice-gapminder/03-seeking-help/index.html)
 

@@ -1,13 +1,20 @@
 ---
 title: "Learning R"
-format: 
-  gfm:
-    output-file: "README"
-    output-ext: "md"
+format: html
 ---
 
 <!-- This file is not intended to be edited -->
-<!-- Progress updates will be rendered automatically when pushing to GitHub -->
+<!-- Render this file to see automated progress updates on your exercises -->
+
+## Setup
+
+You'll want to install the following prior to starting this course:
+
+* [R and RStudio](https://posit.co/download/rstudio-desktop/)
+
+On a related note, if you are a student (i.e. if you must have a '.edu' email and a student ID card), you should check out the [GitHub Student Developer Pack](https://education.github.com/pack). It comes with all sorts of freebies and discounts for developer tools including things like training, GitHub Pro, JetBrains, Microsoft Azure, Codespaces, and GitKraken.
+
+## Your progress
 
 ```{r}
 #| include: false
@@ -16,24 +23,26 @@ library(dplyr)
 library(purrr)
 
 library(LearnR) # devtools::install_github('johnsonra/LearnR')
+# check that we are running the most recent version of LearnR
+if(sessionInfo()$otherPkgs$LearnR$Version != "1.0-2")
+    warning('Check your version of LearnR. A newer version may be available')
+
+library(SnowballC)
 library(quarto)
 
 library(knitr)
 
 
-# sample solutions base (use specific commit to keep things consistent with forks)
+# sample solutions base (solutions branch)
+# (use specific commit to keep things consistent with forks)
 # add file path to this to get raw file content
-solution_sha <- '2d96b8d2d157fd887510ce28e504aaa3a925fdbd'
+solution_sha <- 'a91170c8cea06f5adafabebf9af1e13afe154806'
 solution_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/', solution_sha, '/')
 
-# starter code base
-starter_sha <- '97ca9884ce7e0db3052b15ecab24d03b646ff67b'
+# starter code base (main branch)
+starter_sha <- '049afd4ac5ab145c933192e533419ce765e75d5b'
 starter_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/', starter_sha, '/')
 
-# current branch
-branch <- system('git branch', intern = TRUE) %>%
-  grep(pattern = '*', fixed = TRUE, value = TRUE) %>%
-  gsub(pattern = '* ', replacement = '', fixed = TRUE)
 
 # check submission against solution
 checks <- tibble(modules = system('ls Modules', intern = TRUE),
@@ -48,8 +57,12 @@ checks <- tibble(modules = system('ls Modules', intern = TRUE),
                    starter_file <- readLines(.x)
                    submission_file <- readLines(.y)
                    
-                   length(starter_file) != length(submission_file) |
-                      any(starter_file  !=        submission_file)
+                   if(length(starter_file) != length(submission_file)) # if we have added lines, work has begun
+                     return(TRUE)
+                   if(any(starter_file != submission_file)) # if the number of lines in the same, but some lines have changed...
+                     return(TRUE)
+                   
+                   return(FALSE) # files are identical - work has not started
                  }),
                    
                  # only parse these if they have submitted an update to this file
@@ -59,12 +72,14 @@ checks <- tibble(modules = system('ls Modules', intern = TRUE),
                  solutions = map(solution_path, ~ parse_qmd(.x)),
 
                  # double check that the solution renders - if not, we'll count it as incomplete
-                 submission_renders = ifelse(started,
-                                             map_lgl(modules, ~ {
-                                               val <- try(quarto_render(paste0('Modules/', .x, '/exercises.qmd')), silent = TRUE)
-                                               return(class(val) != 'try-error')
-                                               }),
-                                             FALSE),
+                 submission_renders = map2_lgl(modules, started, ~ {
+                   if(.y)
+                   {
+                     val <- try(quarto_render(paste0('Modules/', .x, '/exercises.qmd')), silent = TRUE)
+                     return(class(val) != 'try-error')
+                   }
+                   
+                   return(FALSE)}),
                  
                  # compare submission to solution
                  code_sim = map2(submissions, solutions, ~ {
@@ -110,10 +125,7 @@ plot_score <- function(score_i, score_png, color = 'green4', message = paste0(ro
 for(l in 1:nrow(checks)) # for each lesson
 {
   module_path <- paste0('Modules/', checks$modules[l], '/')
-  gh_url <- ifelse(branch == 'main',
-                   'tree/main/',
-                   '')
-  
+
   # label if they haven't started the exercise
   if(!checks$started[l])
   {
@@ -130,7 +142,7 @@ for(l in 1:nrow(checks)) # for each lesson
     plot_score(1,
                paste0(module_path, 'score0.png'),
                color = 'orange',
-               message = 'Error')
+               message = 'Rendering Error')
   }else{
   
     # over-all score
@@ -138,21 +150,22 @@ for(l in 1:nrow(checks)) # for each lesson
                paste0(module_path, 'score0.png'))
   
     # read in rendered output
-    f_md <- paste0(module_path, 'README.md')
+    f_md <- paste0(module_path, 'exercises.html')
     out_md <- readLines(f_md)
   
     # identify challenges
-    challenges <- grepl('#### Challenge', out_md) %>%
+    challenges <- grepl('<section id="challenge-', out_md) %>%
       which()
   
-    # double check that we have the correct number of challenges
-    if(length(challenges) != length(checks$code_sim[[l]]))
+    # double check that we have the correct number of challenges (hack module 2 for now)
+    if(length(challenges) != length(checks$code_sim[[l]]) & l != 2)
     {
       warning("Number of challenges aren't equal to number of solutions")
       plot_score(1,
                  paste0(module_path, 'score0.png'),
                  color = 'orange',
-                 message = 'Error')
+                 message = 'Error') # this is likely because there is a hard return that was removed
+                                    # (e.g. causing "<!-- Challenge..." to be included in the line before it should be)
     }else{
   
       for(i in 1:length(checks$code_sim[[l]])) # for each challenge in lesson `l`
@@ -160,15 +173,24 @@ for(l in 1:nrow(checks)) # for each lesson
         # make graphic
         plot_score(with(checks, code_sim[[l]][i] * text_sim[[l]][i]),
                    paste0(module_path, 'score', i, '.png'))
+          
+        # another module 2 hack
+        if(l == 2)
+        {
+            i_hack <- i + 1
+        }else{
+            i_hack <- i
+        }
     
         # add graphic to readme
-        out_md[challenges[i]] <- paste0(out_md[challenges[i]], ' <img src="score', i, '.png">')
+        out_md[challenges[i_hack] + 1] <- paste0(out_md[challenges[i_hack] + 1],
+                                                 ' <img src="score', i, '.png">')
       }
     }
   }  
   # create table
-  checks$Lesson[l] <- gsub('-', ' ', checks$modules[l])
-  checks$Score[l] <- paste0('<a href="', gh_url, module_path, '"><img src="', gh_url, module_path, 'score0.png"></a>')
+  checks$Lesson[l] <- paste0('<a href="', module_path, 'exercises.html">', gsub('-', ' ', checks$modules[l]), "</a>")
+  checks$Score[l] <- paste0('<a href="', module_path, '"><img src="', module_path, 'score0.png"></a>')
   
   # write changes
   cat(out_md, file = f_md, sep = '\n')

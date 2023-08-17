@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-The exercises in this document follow along closely with [Lesson 14](https://swcarpentry.github.io/r-novice-gapminder/14-tidyr/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+The exercises in this document follow along closely with [Lesson 14](https://swcarpentry.github.io/r-novice-gapminder/14-tidyr.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
 
 ::: callout-tip
 ## Key Points
@@ -42,7 +42,7 @@ The `gap_wide` data set is formatted such that there is only one row per country
 
 ```{r}
 library(readr)
-gap_wide <- read_csv('https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_wide.csv')
+gap_wide <- read_csv('https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_wide.csv')
 gap_wide
 ```
 

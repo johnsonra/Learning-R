@@ -1,10 +1,10 @@
 ---
-title: "RStudio Intro"
+title: "Control Flow"
 format: html
 editor: visual
 ---
 
-The exercises in this document follow along closely with [Lesson 7](https://swcarpentry.github.io/r-novice-gapminder/07-control-flow/index.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+The exercises in this document follow along closely with [Lesson 7](https://swcarpentry.github.io/r-novice-gapminder/07-control-flow.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
 
 ::: callout-tip
 ## Key Points
