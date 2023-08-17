@@ -32,6 +32,7 @@ Is gapminder a purely long, purely wide, or some intermediate format?
 
 <!-- Challenge 1 answer begin -->
 
+`gapminder` is some intermediate between wide and long.
 
 <!-- Challenge 1 answer end -->
 
@@ -41,7 +42,7 @@ The `gap_wide` data set is formatted such that there is only one row per country
 
 ```{r}
 library(readr)
-gap_wide <- read_csv('https://raw.githubusercontent.com/swcarpentry/r-novice-gapminder/gh-pages/_episodes_rmd/data/gapminder_wide.csv')
+gap_wide <- read_csv('https://swcarpentry.github.io/r-novice-gapminder/data/gapminder_wide.csv')
 gap_wide
 ```
 
@@ -73,7 +74,10 @@ Using `gap_long`, calculate the mean life expectancy, population, and gdpPercap 
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# insert code here
+gap_long %>%
+    group_by(continent, obstype) %>%
+    summarize(mean_value = mean(obs_values)) %>%
+    ungroup()
 ```
 
 <!-- Challenge 2 answer end -->
@@ -85,7 +89,9 @@ Create a `gap_ludicrously_wide` format data by pivoting over countries, year and
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# insert code here
+gap_long %>%
+    unite(var_names, obstype, year, country) %>%
+    pivot_wider(names_from = var_names, values_from = obs_values)
 ```
 
 <!-- Challenge 3 answer end -->

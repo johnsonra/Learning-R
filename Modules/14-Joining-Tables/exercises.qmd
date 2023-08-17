@@ -36,8 +36,10 @@ Using the `full_join` function, join tables `jdf4` and `jdf5`. What has happened
 <!-- Challenge 1 answer begin -->
 
 ```{r}
-# Insert code here
+full_join(jdf4, jdf5)
 ```
+
+`P26039` was only found in `jdf4`, and `P02468` is only found in `jdf5`. All rows are kept, because we are using `full_join`, so values where no corresponding match is found are returned as `NA`.
 
 <!-- Challenge 1 answer end -->
 
@@ -48,7 +50,7 @@ Join tables `jdf4` and `jdf5`, keeping only observations in `jdf4`.
 <!-- Challenge 2 answer begin -->
 
 ```{r}
-# Insert code here
+left_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 2 answer end -->
@@ -60,7 +62,7 @@ Join tables `jdf4` and `jdf5`, keeping only observations in `jdf5`.
 <!-- Challenge 3 answer begin -->
 
 ```{r}
-# Insert code here
+right_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 3 answer end -->
@@ -72,7 +74,7 @@ Join tables `jdf4` and `jdf5`, keeping observations observed in both tables.
 <!-- Challenge 4 answer begin -->
 
 ```{r}
-# Insert code here
+inner_join(jdf4, jdf5)
 ```
 
 <!-- Challenge 4 answer end -->
@@ -89,6 +91,6 @@ interpret the result, where both tables have duplicated keys.
 
 <!-- Challenge 5 answer begin -->
 
-*insert answer here*
+`Q99PL5` is repeated twice in both `jdf6` and `jdf7`, and `inner_join` doesn't recognize that `isoform` and `isoform_num` should be the matched. Because of this we get all combinations (4 rows), which doesn't make a whole lot of sense. Explicitly matching `isoform` with `isoform_num` will take care of this issue.
 
 <!-- Challenge 5 answer end -->
