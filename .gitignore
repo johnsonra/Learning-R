@@ -7,3 +7,6 @@
 libs/
 *.html
 *.png
+*.pdf
+
+*.csv
