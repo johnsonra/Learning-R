@@ -19,7 +19,7 @@ Welcome to this self-directed course on R and RStudio. Very little prior experie
 12. [dplyr](https://youtu.be/L78x2bbWL4g)
 13. [tidyr](https://youtu.be/hDsXKHls4c0)
 14. [Joining tables](https://youtu.be/NOj_LkY_Iao)
-15. Writing good software
+15. [Writing good software](https://youtu.be/6XbdQwzWg0c)
 
 ## Setup
 
