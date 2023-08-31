@@ -3,10 +3,3 @@
 *.Rproj
 *.Rhistory
 .Rproj.user/
-
-libs/
-*.html
-*.png
-*.pdf
-
-*.csv
