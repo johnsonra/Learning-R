@@ -45,7 +45,7 @@ starter_base <- paste0('https://raw.githubusercontent.com/johnsonra/Learning-R/'
 
 
 # check submission against solution
-checks <- tibble(modules = system('ls Modules', intern = TRUE)) %>%
+checks <- tibble(modules = list.files('Modules')) %>%
     filter(!grepl("Writing Good Software", modules)) %>%
     mutate(# paths to files on GitHub
            starter_path = paste0(starter_base, 'Modules/', modules, '/exercises.qmd'),
