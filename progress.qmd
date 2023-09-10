@@ -22,7 +22,13 @@ On a related note, if you are a student (i.e. if you must have a '.edu' email an
 library(dplyr)
 library(purrr)
 
-library(LearnR) # devtools::install_github('johnsonra/LearnR')
+if(!require(LearnR))
+    c("The LearnR package is required to run this file.",
+      "First, install the `devtools` package from CRAN,",
+      "Then run this command: devtools::install_github('johnsonra/LearnR')") %>%
+    paste(collapse = '\n') %>%
+    stop()
+
 # check that we are running the most recent version of LearnR
 if(sessionInfo()$otherPkgs$LearnR$Version != "1.0-2")
     warning('Check your version of LearnR. A newer version may be available')
