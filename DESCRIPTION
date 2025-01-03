@@ -1,0 +1,13 @@
+Package: RNoviceGapminder
+Title: Learning R
+Version: 0.0-1
+Authors@R: c(person('Randy', 'Johnson', email = 'randall.johnson@nih.gov',
+                    role = c('cre', 'aut')))
+Description: A package with `learnr` tutorials to go along with Sofware Carpentry's R Novice Gapminder lessons (see https://swcarpentry.github.io/r-novice-gapminder).
+License: MIT + file LICENSE
+Remotes: johnsonra/ai4teaching
+Depends: R (>= 4.4), learnr, ai4teaching
+Encoding: UTF-8
+URL: https://github.com/johnsonra/RNoviceGapminder
+Language: en-US
+RoxygenNote: 7.3.2

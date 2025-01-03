@@ -13,6 +13,7 @@ description: "Introduction to R and RStudio"
 
 library(learnr)
 library(ai4teaching) # isntall with: devtools::install_github('johnsonra/ai4teaching')
+Sys.setenv(model = 'gemini-1.5-pro')
 ```
 
 The exercises in this document are a companion to [this tutorial](https://youtu.be/_98f-UMBMz4?si=HhszKrM9yNmyQQ04), which follows along closely with [Lesson 1](https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
@@ -27,10 +28,6 @@ The exercises in this document are a companion to [this tutorial](https://youtu.
 -   Use `rm()` to delete objects in a script.
 -   Use `install.packages()` to install packages and `library()` to load them.
 :::
-
-```{r}
-model <- 'gemini-1.5-pro'
-```
 
 
 #### Challenge 1
@@ -77,7 +74,7 @@ quiz(question_text("Run the code from the previous challenge, and write a comman
                    answer_fn(function(value){
                      check_answer("Given two variables, `mass` and `age`, provide a line of R code that will check if `mass` is greater than `age`",
                                        value,
-                                       model,
+                                       model = Sys.getenv('model'),
                                        api_key = OPsecrets::get_secret('GEMINI_API_KEY', 'Private', 'Gemini', 'api_key'))
                    }), allow_retry = TRUE),
      question("Is mass larger than age?",
@@ -94,7 +91,7 @@ question_text("Write a command to remove the `mass` and `age` variables from you
               answer_fn(function(value){
                 check_answer("Provide a line of R code that will remove the variables `mass` and `age` from the workspace.",
                              value,
-                             model,
+                             model = Sys.getenv('model'),
                              api_key = OPsecrets::get_secret('GEMINI_API_KEY', 'Private', 'Gemini', 'api_key'))
                 }), allow_retry = TRUE)
 ```
@@ -107,7 +104,7 @@ question_text("Provide a command that will install the `gapminder` package.",
               answer_fn(function(value){
                 check_answer("Provide the R command that will install the `gapminder` package.",
                              value,
-                             model,
+                             model = Sys.getenv('model'),
                              api_key = OPsecrets::get_secret('GEMINI_API_KEY', 'Private', 'Gemini', 'api_key'))
                 }), allow_retry = TRUE)
 ```
