@@ -1,0 +1,113 @@
+---
+title: "RStudio Intro"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+runtime: shiny_prerendered
+description: "Introduction to R and RStudio"
+---
+
+```{r setup}
+#| include: false
+
+library(learnr)
+library(ai4teaching) # isntall with: devtools::install_github('johnsonra/ai4teaching')
+```
+
+The exercises in this document are a companion to [this tutorial](https://youtu.be/_98f-UMBMz4?si=HhszKrM9yNmyQQ04), which follows along closely with [Lesson 1](https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro.html) of [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder/), provided by the [Software Carpentry](https://software-carpentry.org/) community under the creative commons license, [CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/). For more information see [The Carpentries](https://carpentries.org/).
+
+::: callout-tip
+## Key Points
+
+-   Use RStudio to write and run R programs.
+-   R has the usual arithmetic operators and mathematical functions.
+-   Use `<-` to assign values to variables.
+-   Use `ls()` to list the variables in a program.
+-   Use `rm()` to delete objects in a script.
+-   Use `install.packages()` to install packages and `library()` to load them.
+:::
+
+```{r}
+model <- 'gemini-1.5-pro'
+```
+
+
+#### Challenge 1
+
+```{r challenge1, echo=FALSE}
+question("Which of the following are valid R variable names?",
+         answer('min_height', correct = TRUE),
+         answer('max.height', correct = TRUE),
+         answer('_age'),
+         answer('.mass', correct = TRUE),
+         answer('MaxLength', correct = TRUE),
+         answer('min-length'),
+         answer('2widths'),
+         answer('celsius2kelvin', correct = TRUE),
+         allow_retry = TRUE)
+```
+
+
+#### Challenge 2
+
+```{r}
+#| echo: true
+mass <- 47.5
+age <- 122
+mass <- mass * 2.3
+age <- age - 20
+```
+
+```{r challenge2, echo=FALSE}
+quiz(question("What is the value of `mass` after running the lines of code above?",
+              answer(109.25, correct = TRUE),
+              type = "learnr_text"),
+     question("What is the value of `age` after running the lines of code above?",
+              answer(102, correct = TRUE),
+              type = "learnr_text"),
+     caption = '')
+```
+
+
+#### Challenge 3
+
+```{r challenge3, echo=FALSE}
+quiz(question_text("Run the code from the previous challenge, and write a command to check if `mass` is larger than `age`.",
+                   answer_fn(function(value){
+                     check_answer("Given two variables, `mass` and `age`, provide a line of R code that will check if `mass` is greater than `age`",
+                                       value,
+                                       model,
+                                       api_key = OPsecrets::get_secret('GEMINI_API_KEY', 'Private', 'Gemini', 'api_key'))
+                   }), allow_retry = TRUE),
+     question("Is mass larger than age?",
+              answer('Yes', correct = TRUE),
+              answer('No')),
+     caption = '')
+```
+
+
+#### Challenge 4
+
+```{r challenge4, echo=FALSE}
+question_text("Write a command to remove the `mass` and `age` variables from your workspace.",
+              answer_fn(function(value){
+                check_answer("Provide a line of R code that will remove the variables `mass` and `age` from the workspace.",
+                             value,
+                             model,
+                             api_key = OPsecrets::get_secret('GEMINI_API_KEY', 'Private', 'Gemini', 'api_key'))
+                }), allow_retry = TRUE)
+```
+
+
+#### Challenge 5
+
+```{r challenge5, echo=FALSE}
+question_text("Provide a command that will install the `gapminder` package.",
+              answer_fn(function(value){
+                check_answer("Provide the R command that will install the `gapminder` package.",
+                             value,
+                             model,
+                             api_key = OPsecrets::get_secret('GEMINI_API_KEY', 'Private', 'Gemini', 'api_key'))
+                }), allow_retry = TRUE)
+```
