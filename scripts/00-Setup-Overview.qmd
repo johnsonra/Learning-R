@@ -4,30 +4,19 @@ format: gfm
 jupyter: python3
 ---
 
-```{python setup}
-#| include: false
-import pyautogui # see https://pyautogui.readthedocs.io/en/latest/
-import time
-
-#pyautogui.screenshot().save('test.png')
-
-time.sleep(3)
-pyautogui.position()
-# Setup (in window order)
-#   RStudio (specify project)
-#   Screenflick
-```
-
 <!-- 
-Start with the following windows open:
-  * Screenflick
+Start with the following windows open (close extra windows):
   * Chrome (start an incognito tab at https://google.com)
+  * RStudio (RNoviceGapminder project in Downloads folder with default appearance - disable Copilot)
+Record the entire script as video then do the screen capture in a separate video, following along with the audio.
 -->
 
 <!-- Camera -->
 <!--### Video Intro ###-->
 
-Welcome to this overview of a video series titled [R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder) provided by the [Software Carpentry](https://software-carpentry.org/) community under the [creative commons license](https://creativecommons.org/licenses/by/4.0/). For more information see [carpentries.org](https://carpentries.org/).
+Welcome to this overview video for the "[R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder)" series. The information we'll be covering in this series is provided by the [Software Carpentry](https://software-carpentry.org/) community under the [creative commons license](https://creativecommons.org/licenses/by/4.0/).
+
+To join the Software Carpentry community - to engage with other learners and contributors for support and inspiration go to [carpentries.org](https://carpentries.org)
 
 <!--### Why use R and RStudio? ###-->
 
@@ -41,70 +30,9 @@ However, to make using R easier, we will use the program RStudio, which we also 
 
 In this video we'll be walking through setting up your computer for this video series. 
 
-<!-- Switch to Chrome browser -->
 <!--### Install R and RStudio ###-->
 
-```{python}
-#| echo: false
-
-# Start video clip
-
-
-# switch to Chrome
-pyautogui.hotkey('command', 'tab')
-pyautogui.click(100, 250)
-
-# search up CRAN
-pyautogui.hotkey('command', 'l')
-time.sleep(0.5)
-pyautogui.typewrite('cran\n')
-
-# navigate to CRAN
-time.sleep(5)
-pyautogui.position()
-pyautogui.moveTo(364, 345, 0.5)
-pyautogui.click()
-
-# pick a distribtuion (Mac)
-time.sleep(2)
-pyautogui.moveTo(616, 269, 0.2)
-time.sleep(0.1)
-pyautogui.moveTo(581, 326, 0.1)
-time.sleep(0.1)
-pyautogui.moveTo(654, 301, 0.1)
-time.sleep(1)
-pyautogui.click()
-time.sleep(4)
-
-# search up RStudio
-pyautogui.hotkey('command', 'l')
-time.sleep(0.5)
-pyautogui.typewrite('Posit RStudio', 0.1)
-time.sleep(1)
-pyautogui.hotkey('return')
-
-# go to posit.co
-time.sleep(1)
-pyautogui.moveTo(312, 353, 0.3)
-pyautogui.click()
-
-# go to RStudio Desktop download page
-time.sleep(1)
-pyautogui.moveTo(288, 778, 0.2)
-pyautogui.click()
-
-# pick Install RStudio
-time.sleep(2)
-pyautogui.moveTo(1001, 1022, 0.5)
-time.sleep(0.3)
-pyautogui.click()
-
-# don't download
-pyautogui.hotkey('esc')
-
-# end video clip
-
-```
+<!-- Start screen capture -->
 
 To start with, go to [cran.r-project.org](https://cran.r-project.org/) and follow one of these links to the correct distribution for your computer.
 
@@ -120,7 +48,7 @@ Again, if you don't already have RStudio installed, pause the video here while y
 
 OK, now that we have R and RStudio installed, let's install a couple more things.
 
-In addition to following along with the videos, which I highly encourage, we'll be including some challenges along the way to give you some hands on practice implementing the techniques we'll be covering. For each of these challenges you'll be given a task, and you'll provide your solution in an interactive form. This can be connected to a language model which will give you feedback while you work through the problem.
+In addition to following along in RStudio with the videos, which I highly encourage, we'll be including some challenges along the way to give you some hands on practice implementing the techniques we'll be covering. For each of these challenges you'll be given a task, and you'll provide your solution in an interactive form. This can be connected to a language model which will give you feedback while you work through the problem.
 
 As with most things we do in R, this functionality comes in a package - specifically the `RNoviceGapminder` package. We'll cover package installation in more detail in a later video, but for now start up RStudio and type the following in the console:
 
