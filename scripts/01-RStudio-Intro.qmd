@@ -1,0 +1,116 @@
+---
+title: "RStudio Intro script"
+format: gfm
+jupyter: python3
+---
+
+```{python setup}
+#| include: false
+import pyautogui # see https://pyautogui.readthedocs.io/en/latest/
+import time
+
+#pyautogui.screenshot().save('test.png')
+
+# Setup (in window order,  close extra windows)
+#   RStudio (RNoviceGapminder project in Downloads folder with default appearance - console over source on the left, environment over files on the right - disable Copilot)
+#   Screenflick
+```
+
+
+<!-- camera only -->
+
+Welcome to this overview video for the "[R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder)" series. The information we'll be covering in this series is provided by the [Software Carpentry](https://software-carpentry.org/) community under the [creative commons license](https://creativecommons.org/licenses/by/4.0/).
+
+To join the Software Carpentry community - to engage with other learners and contributors for support and inspiration go to [carpentries.org](https://carpentries.org)
+
+I'm assuming you have R and RStudio installed as well as the `RNoviceGapminder` package. If you don't have those installed yet, see my previous [setup]() video to get everything ready.
+
+
+<!-- start live screen capture (01_001.mp4) -->
+<!-- Tour of RStudio -->
+
+When you first open RStudio, you should see three panels:
+
+* The interactive R console/Terminal will take up the entire left of the screen,
+* The Environment pane will show up here on the upper right, and 
+* The Files pane will be here on the lower left.
+
+You'll also see some tabs in each of these panes:
+
+* The R Console will be visible on the left, and we should also have
+  * A Terminal window, which gives us access to the command line, <!-- don't click -->
+  * As well as a Background Jobs tab - this will show you the status and output of any background jobs you run. You can pretty much ignore that one for now.
+
+* The Environment tab will be visible in this pane - this has summary list of all the variables you have in your working environment. In this pane we also have
+  * The History tab, which will display a list of all the commands you have entered into the R console,
+  * A Connections tab, which will show any database connections you have active, and
+  * A Tutorial tab. This has links to tutorials on a number of topics, provided by Posit.
+  * If you open the settings, there are a number of other tabs we can show or hide here, but I think these are the defaults.
+
+* Lastly, in the bottom right pane, we have a File viewer with a list of all our files and some shortcuts for working with them. This directory is empty, but you'll see files start to appear here as we create them. The other default tabs are
+  * The Plots tab, which is where our figures will show up when we generate them,
+  * The Packages tab, which we can reference to see which packages are currently loaded - these are all the packages I have installed right now and those with a check mark are loaded,
+  * The Help tab will be where we can peruse package documentation,
+  * The Viewer will sometimes show previews of quarto or Rmarkdown documents when we render them - we'll ignore that for now, and
+  * The Presentation tab is where we can preview a quarto or Rmarkdown presentation after rendering.
+  * As with the Environment tab, there are a bunch of other tabs that we can show or hide, but these are the defaults.
+
+If we create a new R script, either here in the top left corner or I prefer to use this button in the Files pane - and I'm going to call this `script01.R` - that script will pop up in a new pane above the console pane.
+
+
+<!-- Updating the default look and feel -->
+
+Personally, I find that the default view doesn't make efficient use of the screen, so I'm going to modify the layout of the panes a bit. To do so, I'm going to go to `Tools > Gobal Options...` and then select the `Pane Layout` option on the left.
+
+The main thing I'm going to change is to set the top right pane to `Console` - this will automatically move the Environment pane to the lower left.
+
+While we're here, lets also take a look at the `Appearance` option. You can use this to modify the appearance of RStudio. I usually pick something like "Tomorrow Night Bright", but I'm going to stick with the default for these videos.
+
+Once we are done making changes to our global settings, click `Apply` - now you can see that the panes have swapped places.
+
+
+<!-- Don't save or load .RData! -->
+
+Before we finish with our preferences, I'm going to go back to the `General` options and uncheck `Restore .RData into workspace at startup:` and `Never` save the workspace on exit. This was the original default behavoir in R going way back, but I've found this makes my scripts less reproducible. Anything I want in my workspace, I want to be documented in my code here on the left.
+
+Saving your work in a `.RData` file sounds like a good idea until you find yourself starting up R and discover that you have a mystery variable saved in your environment - <!-- refer to Environment Pane --> this is one place you might notice it - or what can be even worse is that you did something to a variable in your console but didn't record that action in your script. That is a problem because when you try to reproduce your results, you're going to get something different.
+
+When I have steps in a script that take hours or days to run, I will often explicitly save a checkpoint in my code - this allows me to save partially analyzed data, but exactly what is in that checkpoint is clearly outlined in my code.
+
+I think that covers the basics - There are lots of other options here as well, though - OK. <!-- click OK -->
+
+I'm going to keep this script open, and I also typically minimize the Environment pane to give myself more realestate on the left here. We're going to use this script on the left to help us maintain a record of the commands we have used, and also to avoid having to type things over again into the console.
+
+
+<!-- Workflow within RStudio -->
+
+There are two main ways one can work within RStudio:
+
+We can test and play within the interactive R console, then copy code into a `.R` file to run later. If that is what we want to do, we can easily access our command history over here. <!-- refer to History tab --> This works well when doing small tests and initially starting off, but it quickly becomes a pain to maintain reproducibility.
+
+It is much more efficient to start with an R script like our `.R` file here and use RStudio’s short cut keys to either run the whole script or to step through it one bit at a time. We can run the whole file with the `Source` button here, or we can hit `control-return` on Windows or `command-return` on a Mac to step through your code one section at a time.
+
+This is a great way to start - all your code is saved for later, and you will be able to run the file you create from within RStudio or from the command line if desired down the road.
+
+<!-- end live screen capture -->
+
+## Intro to R
+
+### Using R as a calculator
+
+### Functions
+
+### Comparing things
+
+### Variables
+
+<!-- start up the tutorial for Challenge 1 -->
+
+### Vectorization
+
+### Managing the Environment
+
+### R Packages
+
+## Practice
+

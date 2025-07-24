@@ -11,7 +11,7 @@ Start with the following windows open (close extra windows):
 Record the entire script as video then do the screen capture in a separate video, following along with the audio.
 -->
 
-<!-- Camera -->
+<!-- Camera only -->
 <!--### Video Intro ###-->
 
 Welcome to this overview video for the "[R for Reproducible Scientific Analysis](https://swcarpentry.github.io/r-novice-gapminder)" series. The information we'll be covering in this series is provided by the [Software Carpentry](https://software-carpentry.org/) community under the [creative commons license](https://creativecommons.org/licenses/by/4.0/).
@@ -32,7 +32,7 @@ In this video we'll be walking through setting up your computer for this video s
 
 <!--### Install R and RStudio ###-->
 
-<!-- Start screen capture -->
+<!-- Start screen capture (00_001.mp4) -->
 
 To start with, go to [cran.r-project.org](https://cran.r-project.org/) and follow one of these links to the correct distribution for your computer.
 
